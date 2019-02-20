@@ -1,0 +1,25 @@
+//
+SELECT ALL QUESTIONS ON PARTICULAR SURVEY..
+//
+select *
+from questions q
+join survey s on s.survey_id = q.survey_id
+WHERE s.survey_id = 3;
+
+//
+select survey title/subtitle.. question.title & option.content.
+//
+select s.title, s.subTitle, q.title, o.content
+from questions q
+join survey s on s.survey_id = q.survey_id
+join options o on o.question_id = q.question_id
+WHERE s.survey_id = 1;
+
+
+//
+get all the titadmin surveys.
+//
+-- select *
+-- FROM survey s
+-- JOIN admin a on a.admin_id = s.admin_id
+-- where a.admin_id = 1;
