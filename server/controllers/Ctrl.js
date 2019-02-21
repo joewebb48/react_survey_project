@@ -38,6 +38,18 @@ module.exports = {
       res.status(500).send(error);
     }
   },
+  getOptions: async (req, res) => {
+    try {
+      let dbInstance = req.app.get('db');
+      const { id } = req.params;
+
+      let options = await dbInstance.getOptions(id);
+      res.send(options);
+    } catch (error) {
+      console.log('error options:', error);
+      res.status(500).send(error);
+    }
+  },
   createSurvey: async (req, res) => {
     console.log('add survey hit');
     try {

@@ -39,6 +39,7 @@ app.get('/auth/currentAdmin', Auth_ctrl.getCurrentAdmin);
 // app.get(`/api/surveys/:id`, Ctrl.getSurvey);
 app.get(`/api/survey/:id`, Ctrl.getSingleSurvey);
 app.get(`/api/surveys/:id`, Ctrl.getAllAdminSurveys);
+app.get(`/api/options/:id`, Ctrl.getOptions);
 app.post(`/api/surveys`, Ctrl.createSurvey);
 
 //QUESTIONS.

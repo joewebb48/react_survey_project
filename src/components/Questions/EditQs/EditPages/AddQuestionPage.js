@@ -5,79 +5,79 @@ import newId from '../../../../IdGenerator/idGenerator';
 export default class AddQuestionPage extends Component {
   addSingleLine = () => {
     return {
-      _id: newId(),
-      type: 2,
-      title: 'Untitled',
-      placeholder: ''
+      question_id: newId(),
+      type_id: 2,
+      question_title: 'Untitled',
+      content: 'placeholder...'
     };
   };
   addMultiLine() {
     return {
-      _id: newId(),
-      type: 3,
-      title: 'Untitled',
-      placeholder: ''
+      question_id: newId(),
+      type_id: 3,
+      question_title: 'Untitled',
+      content: 'placeholder'
     };
   }
   addMultipleChoice() {
     return {
-      _id: newId(),
-      type: 4,
-      title: 'Select a choice',
+      question_id: newId(),
+      type_id: 4,
+      question_title: 'Select a choice',
       options: [
         {
-          o_id: newId(),
-          content: 'First Choice'
+          content: 'First Choice',
+          options_id: newId()
         },
         {
-          o_id: newId(),
-          content: 'Second Choice'
+          content: 'Second Choice',
+          options_id: newId()
         },
         {
-          o_id: newId(),
-          content: 'Third Choice'
+          content: 'Third Choice',
+          options_id: newId()
         }
       ]
     };
   }
   addCheckBox() {
     return {
-      _id: newId(),
-      type: 5,
-      title: 'Select a choice',
+      question_id: newId(),
+      type_id: 5,
+      question_title: 'Select a choice',
       options: [
         {
-          o_id: newId(),
-          content: 'First Choice'
+          content: 'First Choice',
+          options_id: newId()
         },
         {
-          o_id: newId(),
-          content: 'Second Choice'
+          content: 'Second Choice',
+          options_id: newId()
         },
         {
-          o_id: newId(),
-          content: 'Third Choice'
+          content: 'Third Choice',
+          options_id: newId()
         }
       ]
     };
   }
   addDropDown() {
     return {
-      _id: newId(),
-      type: 1,
-      title: 'Select a choice',
+      question_id: newId(),
+      type_id: 1,
+      question_title: 'Select a choice',
       options: [
         {
-          o_id: newId(),
-          content: 'First Choice'
+          content: 'First Choice',
+          options_id: newId()
         },
         {
-          o_id: newId(),
-          content: 'Second Choice'
+          content: 'Second Choice',
+          options_id: newId()
         },
         {
-          o_id: newId(),
-          content: 'Third Choice'
+          content: 'Third Choice',
+          options_id: newId()
         }
       ]
     };

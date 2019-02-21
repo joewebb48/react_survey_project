@@ -14,21 +14,46 @@ class SurveyLandingPage extends Component {
       // q_title: '',
       // q_type: '',
       selectedQuestion: 'this will be an found by an ID',
-      questions: []
+      questions: [],
+      preEditQuestions: []
       // ^^^^ this array of questions is going to have objects that have qtitle qtype and qoptions
       // selectedQuestions: = 'index'
     };
   }
   componentDidMount() {
-    axios.get(`/api/survey/${this.props.match.params.surveyId}`).then(res => {
-      console.log('res.data:', res.data);
-      this.setState({
-        s_title: res.data[0].survey_title,
-        s_subtitle: res.data[0].subtitle
-        //   q_title: res.data[0].question_title,
-        //   q_type: res.data[0].type_id
+    axios
+      .get(`/api/survey/${this.props.match.params.surveyId}`)
+      .then(firstRes => {
+        console.log('firstRes.data:', firstRes.data);
+        this.setState({
+          questions: firstRes.data
+        });
+        let promises = [];
+        firstRes.data.forEach((item, i) => {
+          // promises.push(axios.get(`/api/options/${item.question_id}`));
+          axios.get(`/api/options/${item.question_id}`).then(res => {
+            let questions = this.state.questions;
+            questions[i].options = res.data;
+            this.setState({
+              questions: questions
+            });
+          });
+        });
+        axios.all(promises).then((secondRes, i) => {
+          const optionInfo = [];
+          //QUESTIONINFO HAS 'CONTENT', & 'OPTION_ID
+          secondRes.forEach((item, i) => {
+            optionInfo.push(item.data);
+            console.log('option Info', optionInfo[i]);
+          });
+        });
+        this.setState({
+          s_title: firstRes.data[0].survey_title,
+          s_subtitle: firstRes.data[0].subtitle
+          //   q_title: res.data[0].question_title,
+          //   q_type: res.data[0].type_id
+        });
       });
-    });
   }
 
   // METHODS
@@ -61,7 +86,7 @@ class SurveyLandingPage extends Component {
       selectedQuestion,
       questions
     } = this.state;
-    console.log('Qs', questions);
+    console.log('SLP: state', this.state);
     return (
       <div>
         <SurveyPreview
