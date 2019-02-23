@@ -7,7 +7,7 @@ export default class EditContainer extends Component {
   constructor() {
     super();
     this.state = {
-      selectedTab: 1
+      selectedTab: 2
     };
   }
   updateTab(tabType) {
@@ -16,7 +16,7 @@ export default class EditContainer extends Component {
     });
   }
   render() {
-    console.log('edit container', this.props);
+    // console.log('edit container', this.props);
     const {
       s_title,
       s_subtitle,
@@ -28,12 +28,12 @@ export default class EditContainer extends Component {
       updateQuestion,
       updateQuestionTitle,
       updateSurveySubTitle,
+      saveChangesKeyPress,
       updateSurveyTitle
     } = this.props;
-    let { selectedTab } = this.state;
     return (
       <div>
-        <h2>EditContainer</h2>
+        <h2>Edit Survey</h2>
 
         <div>
           <button onClick={() => this.updateTab(1)}>Add Q</button>
@@ -76,6 +76,7 @@ export default class EditContainer extends Component {
                 s_subtitle={s_subtitle}
                 updateSurveyTitle={updateSurveyTitle}
                 updateSurveySubTitle={updateSurveySubTitle}
+                saveChangesKeyPress={saveChangesKeyPress}
               />
             </div>
           ) : (

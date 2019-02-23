@@ -15,13 +15,14 @@ class SurveyListContainer extends Component {
   render() {
     console.log('surveylistContainer', this.props);
     const { surveys } = this.props;
+    // const { survey_id } = this.props.survey;
     return (
       <div>
         <ul>
-          {surveys.map(survey => {
+          {surveys.map((survey, i) => {
             return (
               <li key={survey.id}>
-                <SurveyItem survey={survey} />
+                <SurveyItem key={i} survey={survey} />
               </li>
             );
           })}

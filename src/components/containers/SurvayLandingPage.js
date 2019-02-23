@@ -11,26 +11,23 @@ class SurveyLandingPage extends Component {
     this.state = {
       s_title: '',
       s_subtitle: '',
-      // q_title: '',
-      // q_type: '',
+      question_title: '',
+      options: [],
       selectedQuestion: 'this will be an found by an ID',
-      questions: [],
-      preEditQuestions: []
-      // ^^^^ this array of questions is going to have objects that have qtitle qtype and qoptions
-      // selectedQuestions: = 'index'
+      questions: []
     };
   }
   componentDidMount() {
+    console.log('first Qs', this.state.questions);
     axios
       .get(`/api/survey/${this.props.match.params.surveyId}`)
       .then(firstRes => {
-        console.log('firstRes.data:', firstRes.data);
+        console.log('firstRes.data:', firstRes.data[0]);
         this.setState({
           questions: firstRes.data
         });
         let promises = [];
         firstRes.data.forEach((item, i) => {
-          // promises.push(axios.get(`/api/options/${item.question_id}`));
           axios.get(`/api/options/${item.question_id}`).then(res => {
             let questions = this.state.questions;
             questions[i].options = res.data;
@@ -40,18 +37,19 @@ class SurveyLandingPage extends Component {
           });
         });
         axios.all(promises).then((secondRes, i) => {
+          console.log(secondRes);
           const optionInfo = [];
-          //QUESTIONINFO HAS 'CONTENT', & 'OPTION_ID
           secondRes.forEach((item, i) => {
             optionInfo.push(item.data);
             console.log('option Info', optionInfo[i]);
           });
         });
+
         this.setState({
           s_title: firstRes.data[0].survey_title,
           s_subtitle: firstRes.data[0].subtitle
-          //   q_title: res.data[0].question_title,
-          //   q_type: res.data[0].type_id
+          //   //   q_title: res.data[0].question_title,
+          //   //   q_type: res.data[0].type_id
         });
       });
   }
@@ -60,40 +58,68 @@ class SurveyLandingPage extends Component {
   submitQuestion = () => {};
   addToQuestions = value => {
     const { questions } = this.state;
+    console.log('qs', questions);
+    console.log('qustions on state:', questions);
     const tempQs = questions.slice();
+    console.log('value', value.options);
     tempQs.push(value);
     this.setState({
       questions: tempQs
     });
   };
+  // const { questions } = this.state;
+  // const mappedQuestions = questions.map((question, i) => {
+  //   console.log('mappedQs:', question);
+  //   return question;
+  // });
+
+  // console.log('MQ', mappedQuestions);
+
+  // axios
+  //   .post(
+  //     `/api/saveAddedQuestions/${this.props.match.params.surveyId}`,
+  //     mappedQuestions
+  //   )
+  //   .then(res => {
+  //     console.log(res);
+  //   });
+
   updateQuestion = () => {};
-  updateSurveyTitle = () => {};
-  updateSurveySubTitle = () => {};
+
+  updateSurveyTitle = value => {
+    this.setState({
+      s_title: value
+    });
+  };
+  updateSurveySubTitle = value => {
+    this.setState({
+      s_subtitle: value
+    });
+  };
+  saveChangesKeyPress = e => {
+    const { surveyId } = this.props.match.params;
+    // console.log(surveyId);
+    const { s_title, s_subtitle } = this.state;
+    const newTitleandSubtitle = { s_title, s_subtitle };
+    if (e.key === 'Enter') {
+      console.log('enter button');
+      axios
+        .put(`/api/saveSurveyChanges/${surveyId}`, newTitleandSubtitle)
+        .then(res => {
+          console.log('at least we came back', res);
+        });
+    }
+  };
   updateQuestionTitle = () => {};
 
-  //methods that edit title, subtitle, questions
-  // method that takes the selected questions and passes it down to surveyPreview
-  //a methdo that adds the questionsEditCOmponet to state on survey landing. by using the index
-  //
-  // i need to make an options componetn for the questions. when they add an options push the component to the options objects.
-  //
   render() {
-    const {
-      s_title,
-      s_subtitle,
-      q_title,
-      q_type,
-      selectedQuestion,
-      questions
-    } = this.state;
-    console.log('SLP: state', this.state);
+    // console.log('SLP', this.props);
+    const { s_title, s_subtitle, selectedQuestion, questions } = this.state;
     return (
       <div>
         <SurveyPreview
           s_title={s_title}
           s_subtitle={s_subtitle}
-          q_title={q_title}
-          q_type={q_type}
           selectedQuestion={selectedQuestion}
           questions={questions}
         />
@@ -101,8 +127,6 @@ class SurveyLandingPage extends Component {
         <EditContainer
           s_title={s_title}
           s_subtitle={s_subtitle}
-          q_title={q_title}
-          q_type={q_type}
           selectedQuestion={selectedQuestion}
           questions={questions}
           addToQuestions={this.addToQuestions}
@@ -110,23 +134,10 @@ class SurveyLandingPage extends Component {
           updateSurveySubTitle={this.updateSurveySubTitle}
           updateQuestionTitle={this.updateQuestionTitle}
           updateQuestion={this.updateQuestion}
+          saveChangesKeyPress={this.saveChangesKeyPress}
         />
       </div>
     );
   }
 }
-// function mapStateToProps(reduxState) {
-//   let { isAuthenticated, admin, survey, xid } = reduxState;
-//   return {
-//     isAuthenticated,
-//     admin,
-//     survey,
-//     xid
-//   };
-// }
-
-// export default connect(
-//   mapStateToProps,
-//   { setSurvey, setSurveyById }
-// )(SurveyLandingPage);
 export default SurveyLandingPage;

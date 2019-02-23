@@ -32,6 +32,12 @@
   },
   "proxy": "http://localhost:8888",
   "main": "server/index.js",
+  "nodemonConfig": {
+    "ext": "js,sql",
+    "ignore": [
+      "src/*"
+    ]
+  },
   "browserslist": [
     ">0.2%",
     "not dead",

@@ -9,34 +9,41 @@ import EditDrowpdown from './EditQs/EditDropdown';
 export default function QuestionListContainer(props) {
   // console.log('p', props);
   const { q_title, q_type, selectedQuestion, questions } = props;
-  return (
-    <div>
-      <p>
-        in here `(QuestionListCOntainer)` i need to render the question type
-        componet depending on which type is selected based oin an ID... all the
-        info from props needs to be passwed to the particular component. ... i
-        need to bring in all 5 question type componnets.
-      </p>
-      <h3>
-        thoughts---I am thinking i need to swith these components to the the
-        Edit?? JK.. that is probably what the disabled feature is... and leave
-        the input boxes in the the other compoennts without the dasbled
-      </h3>
-      {/* <h1>{q_title}</h1>
-      <h6>{q_type}</h6>
-      <h6>{selectedQuestion}</h6>
-      <h3>{questions}</h3> */}
-      <SingleLineText />
-      <br />
-      <Checkbox />
-      <br />
-      <MultiLineText />
-      <br />
-      <Dropdown />
-      <br />
-      <MultipleChoice />
-      <br />
-      <EditDrowpdown />
-    </div>
-  );
+
+  const questionType = (type, question, i) => {
+    switch (type) {
+      case 2:
+        return <SingleLineText question={question} key={i} />;
+
+      case 3:
+        return <MultiLineText question={question} key={i} />;
+
+      case 4:
+        return (
+          <MultipleChoice
+            options={question.options}
+            question={question}
+            key={i}
+          />
+        );
+
+      case 5:
+        return (
+          <Checkbox options={question.options} question={question} key={i} />
+        );
+
+      case 1:
+        return (
+          <Dropdown options={question.options} question={question} key={i} />
+        );
+
+      default:
+        break;
+    }
+  };
+
+  const mappedQuestions = questions.map((question, i) => {
+    return questionType(question.type_id, question, i);
+  });
+  return <div>{mappedQuestions}</div>;
 }

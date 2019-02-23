@@ -1,19 +1,18 @@
 import React from 'react';
 
-export default function OptionField() {
+export default function CheckBoxOptionField(props) {
+  // console.log('optionField', props);
+  const { content } = props;
   return (
     <div>
       <input
         type='checkbox'
         className=''
-        value={`content`}
+        value={content}
         // onChange={onChange}
         placeholder='Question Title Change'
       />
-      {`option content`}
-      <div>{/* <button>
-          <span />
-        </button> */}</div>
+      {content}
     </div>
   );
 }

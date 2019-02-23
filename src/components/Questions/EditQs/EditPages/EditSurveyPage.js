@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 
 export default class EditSurveyPage extends Component {
-  updateTitle() {
-    this.props.updateSurveyTitle({
-      title: this.title.value
-    });
-  }
-  updateSurveyTitle() {
-    this.props.updateSurveySubTitle({
-      subTitle: this.subTitle.value
-    });
-  }
+  // updateTitle() {
+  //   this.props.updateSurveyTitle({
+  //     title: this.title.value
+  //   });
+  // }
+  // updateSurveyTitle(value) {
+  //   this.props.updateSurveySubTitle({
+  //     subTitle: value
+  //   });
+  // }
   render() {
     let {
       s_title: title,
       s_subtitle: subTitle,
       updateSurveyTitle,
-      updateSurveySubTitle
+      updateSurveySubTitle,
+      saveChangesKeyPress
     } = this.props;
     return (
       <div>
@@ -29,7 +30,8 @@ export default class EditSurveyPage extends Component {
             ref={input => {
               this.title = input;
             }}
-            onChange={updateSurveyTitle}
+            onChange={e => updateSurveyTitle(e.target.value)}
+            onKeyPress={e => saveChangesKeyPress(e)}
           />
         </div>
         <div>
@@ -39,7 +41,8 @@ export default class EditSurveyPage extends Component {
             ref={input => {
               this.subTitle = input;
             }}
-            onChange={updateSurveySubTitle}
+            onChange={e => updateSurveySubTitle(e.target.value)}
+            onKeyPress={e => saveChangesKeyPress(e)}
           />
         </div>
       </div>

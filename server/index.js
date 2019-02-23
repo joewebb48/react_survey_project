@@ -8,7 +8,7 @@ const Auth_ctrl = require('./controllers/Auth_ctrl');
 
 const app = express();
 
-const { CONNECTION_STRING, SESSION_SECRET } = process.env;
+const { CONNECTION_STRING, SESSION_SECRET, DEV } = process.env;
 // CLEAN THIS UP LATER?
 
 massive(CONNECTION_STRING)
@@ -28,6 +28,18 @@ app.use(
     saveUninitialized: true
   })
 );
+app.use((req, res, next) => {
+  if (DEV) {
+    if (req.session.admin) {
+      next();
+    } else {
+      req.session.admin = { admin_id: 42, email: 7 };
+      next();
+    }
+  } else {
+    next();
+  }
+});
 
 //AUTH
 app.post('/auth/login', Auth_ctrl.login);
@@ -41,9 +53,11 @@ app.get(`/api/survey/:id`, Ctrl.getSingleSurvey);
 app.get(`/api/surveys/:id`, Ctrl.getAllAdminSurveys);
 app.get(`/api/options/:id`, Ctrl.getOptions);
 app.post(`/api/surveys`, Ctrl.createSurvey);
+app.put(`/api/saveSurveyChanges/:id`, Ctrl.saveTitleandSubtitle);
 
 //QUESTIONS.
 app.post(`/api/question`, Ctrl.addQuestion);
+app.post(`/api/saveAddedQuestions/:id`, Ctrl.saveAddedQuestions);
 // app.get(`/api/questions/:id`, Ctrl.getSurvayQuestions);
 
 const SERVER_PORT = process.env.SERVER_PORT;

@@ -82,13 +82,11 @@ export default class AddQuestionPage extends Component {
       ]
     };
   }
-
-  // I MIGHT NEED TO ADD A MTHOD TO THE SURVAYLANDINGPAGE THAT ADDS THESE TO THE QUESTIONS IN STATE???
-
   render() {
     // this is coming from the EditContainer component
     const { addToQuestions } = this.props;
-    console.log(this.props);
+
+    // console.log(this.props);
     return (
       <div>
         <h4>Questions</h4>

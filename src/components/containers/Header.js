@@ -23,9 +23,11 @@ class Header extends Component {
           padding: '40px'
         }}
       >
-        <div id='logo'>
-          <h4>MY Survey App</h4>
-        </div>
+        <Link to='/landing' style={{ textDecoration: 'none', color: 'black' }}>
+          <div id='logo'>
+            <h4>MY Survey App</h4>
+          </div>
+        </Link>
         {this.props.isAuthenticated ? (
           <h1 onClick={this.logout}>Logout</h1>
         ) : (

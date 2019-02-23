@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 
 export default class Dropdown extends Component {
   render() {
+    const { question_title } = this.props.question;
+
+    const mappedOptions = this.props.options
+      ? this.props.options.map((option, i) => {
+          return <option key={i}>{option.content}</option>;
+        })
+      : '';
     return (
       <div>
         <div>
-          <h3>Dropdown</h3>
+          <h1>{question_title}</h1>
         </div>
-        <select>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-        </select>
+        <select>{mappedOptions}</select>
       </div>
     );
   }

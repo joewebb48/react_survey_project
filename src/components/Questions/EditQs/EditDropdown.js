@@ -8,20 +8,20 @@ export default class EditDropdown extends Component {
       <div>
         <form>
           <Dropdown
-            _id='abc'
-            title='a multi choice question'
+            question_id='abc'
+            question_title='a multi choice question'
             options={[
               {
-                _id: 'option1',
-                content: 'option 1'
+                content: 'option 1',
+                options_id: 'option1'
               },
               {
-                _id: 'option2',
-                content: 'option 2'
+                content: 'option 2',
+                options_id: 'option2'
               },
               {
-                _id: 'option3',
-                content: 'option 3'
+                content: 'option 3',
+                options_id: 'option3'
               }
             ]}
           />

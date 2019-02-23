@@ -29,7 +29,7 @@ const questionEditorMap = {
 
 export default class EditQuestionPage extends Component {
   render() {
-    console.log('EditQuestionPage:', this.props);
+    // console.log('EditQuestionPage:', this.props);
     const { selectedQuestion: question, updateQuestion } = this.props;
     let mapped = '';
     if (questionEditorMap[question.type]) {
