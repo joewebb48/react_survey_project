@@ -8,13 +8,14 @@ class SurveyListContainer extends Component {
   componentDidMount() {
     let { admin_id: id } = this.props;
     axios.get(`/api/surveys/${id}`).then(res => {
-      console.log(666, res.data);
+      // console.log(666, res.data);
       this.props.setSurveys(res.data);
     });
   }
   render() {
-    console.log('surveylistContainer', this.props);
+    // console.log('surveylistContainer', this.props);
     const { surveys } = this.props;
+    console.log('SLP: surveys', surveys);
     // const { survey_id } = this.props.survey;
     return (
       <div>

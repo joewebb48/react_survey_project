@@ -8,19 +8,36 @@ import EditDrowpdown from './EditQs/EditDropdown';
 
 export default function QuestionListContainer(props) {
   // console.log('p', props);
-  const { q_title, q_type, selectedQuestion, questions } = props;
+  const { q_title, q_type, questions } = props;
+  const { selectedQuestion } = props;
 
   const questionType = (type, question, i) => {
     switch (type) {
       case 2:
-        return <SingleLineText question={question} key={i} />;
+        return (
+          <SingleLineText
+            type={type}
+            selectedQuestion={selectedQuestion}
+            question={question}
+            key={i}
+          />
+        );
 
       case 3:
-        return <MultiLineText question={question} key={i} />;
+        return (
+          <MultiLineText
+            type={type}
+            selectedQuestion={selectedQuestion}
+            question={question}
+            key={i}
+          />
+        );
 
       case 4:
         return (
           <MultipleChoice
+            type={type}
+            selectedQuestion={selectedQuestion}
             options={question.options}
             question={question}
             key={i}
@@ -29,12 +46,24 @@ export default function QuestionListContainer(props) {
 
       case 5:
         return (
-          <Checkbox options={question.options} question={question} key={i} />
+          <Checkbox
+            type={type}
+            selectedQuestion={selectedQuestion}
+            options={question.options}
+            question={question}
+            key={i}
+          />
         );
 
       case 1:
         return (
-          <Dropdown options={question.options} question={question} key={i} />
+          <Dropdown
+            type={type}
+            selectedQuestion={selectedQuestion}
+            options={question.options}
+            question={question}
+            key={i}
+          />
         );
 
       default:

@@ -33,7 +33,7 @@ app.use((req, res, next) => {
     if (req.session.admin) {
       next();
     } else {
-      req.session.admin = { admin_id: 42, email: 7 };
+      req.session.admin = { admin_id: 43, email: 8 };
       next();
     }
   } else {
@@ -51,14 +51,19 @@ app.get('/auth/currentAdmin', Auth_ctrl.getCurrentAdmin);
 // app.get(`/api/surveys/:id`, Ctrl.getSurvey);
 app.get(`/api/survey/:id`, Ctrl.getSingleSurvey);
 app.get(`/api/surveys/:id`, Ctrl.getAllAdminSurveys);
-app.get(`/api/options/:id`, Ctrl.getOptions);
+
 app.post(`/api/surveys`, Ctrl.createSurvey);
 app.put(`/api/saveSurveyChanges/:id`, Ctrl.saveTitleandSubtitle);
 
 //QUESTIONS.
-app.post(`/api/question`, Ctrl.addQuestion);
+app.post(`/api/question/:id`, Ctrl.addQuestion);
 app.post(`/api/saveAddedQuestions/:id`, Ctrl.saveAddedQuestions);
+//
+// app.get(`/api/selectedQuestion/:id`, Ctrl.selectedQuestion);
+//
 // app.get(`/api/questions/:id`, Ctrl.getSurvayQuestions);
+//OPTIONS
+app.get(`/api/options/:id`, Ctrl.getOptions);
 
 const SERVER_PORT = process.env.SERVER_PORT;
 app.listen(SERVER_PORT, () => {

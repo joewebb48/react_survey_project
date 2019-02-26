@@ -8,7 +8,7 @@ export default class AddQuestionPage extends Component {
       question_id: newId(),
       type_id: 2,
       question_title: 'Untitled',
-      content: 'placeholder...'
+      options: [{ content: 'placeholder', options_id: newId() }]
     };
   };
   addMultiLine() {
@@ -16,7 +16,7 @@ export default class AddQuestionPage extends Component {
       question_id: newId(),
       type_id: 3,
       question_title: 'Untitled',
-      content: 'placeholder'
+      options: [{ content: 'placeholder', options_id: newId() }]
     };
   }
   addMultipleChoice() {
@@ -86,16 +86,15 @@ export default class AddQuestionPage extends Component {
     // this is coming from the EditContainer component
     const { addToQuestions } = this.props;
 
-    // console.log(this.props);
+    console.log('add question page', this.props);
     return (
       <div>
-        <h4>Questions</h4>
-        {/* DOES THIS FUNCTION WORK?? */}
+        <h4>Question Options</h4>
         <button onClick={() => addToQuestions(this.addSingleLine())}>
-          Single Line
+          Single Line Text
         </button>
         <button onClick={() => addToQuestions(this.addMultiLine())}>
-          Multi-Line
+          Multi-Line Text
         </button>
         <button onClick={() => addToQuestions(this.addMultipleChoice())}>
           Multiple Choice

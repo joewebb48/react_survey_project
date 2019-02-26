@@ -4,7 +4,9 @@ import MultiChoiceOptionField from '../MultiChoiceOptionField';
 export default class MultipleChoice extends Component {
   render() {
     // console.log('Mc:', this.props);
-    const { question_title } = this.props.question;
+    const { question_title, question_id } = this.props.question;
+    const { type, selectedQuestion } = this.props;
+    // const { type } = this.props;
 
     const mappedOptions = this.props.options
       ? this.props.options.map((option, i) => {
@@ -13,7 +15,11 @@ export default class MultipleChoice extends Component {
         })
       : '';
     return (
-      <div>
+      <div
+        onClick={() => {
+          selectedQuestion(this.props.question);
+        }}
+      >
         <div>
           <h1>{question_title}</h1>
         </div>

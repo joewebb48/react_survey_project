@@ -3,7 +3,8 @@ import QuestionListContainer from '../../Questions/QuestionListContainer';
 
 export default class SurveyPreview extends Component {
   render() {
-    const { s_title, s_subtitle, selectedQuestion, questions } = this.props;
+    const { s_title, s_subtitle, questions } = this.props;
+    const { selectedQuestion } = this.props;
 
     return (
       <div className='survey_preview'>

@@ -73,7 +73,6 @@ module.exports = {
         correct,
         question_id
       } = req.body;
-      console.log('createSurvey:', req.body);
       let survey = await dbInstance.createSurvey([
         admin_id,
         survey_title,
@@ -93,8 +92,6 @@ module.exports = {
         correct,
         question_id
       ]);
-      // res.send({ survey_id });
-      console.log('shitty shit:', survey, initType, questions, options);
       res.send(survey, initType, questions, options);
     } catch (error) {
       console.log('error creating survey', error);
@@ -104,14 +101,27 @@ module.exports = {
   addQuestion: async (req, res) => {
     try {
       const dbInstance = req.app.get('db');
-
-      let { survey_id, title, type } = req.body;
+      let { question_title, type_id } = req.body;
+      let { id } = req.params;
       let question = await dbInstance.addQuestionToSurvey([
-        survey_id,
-        title,
-        type
+        id,
+        question_title,
+        type_id
       ]);
-      res.send(question);
+      console.log(question);
+
+      let mappedOptions = req.body.options.map(async (option, i) => {
+        let { content } = option;
+        let options = await dbInstance.addOptionToSurvey([
+          content,
+          null,
+          question[0].question_id
+        ]);
+        return options;
+      });
+      // console.log(options);
+      let newQ = [question, mappedOptions];
+      res.send(newQ);
     } catch (error) {
       console.log('error cant Add Questions:', error);
       res.status(500).send(error);
@@ -133,6 +143,31 @@ module.exports = {
       console.log('error saving title and/or subtitle', error);
     }
   }
+  // selectedQuestion: async (req, res) => {
+  //   console.log(`we hit selectedQ`);
+  //   try {
+  //     let dbInstance = req.app.get('db');
+  //     const { id } = req.params;
+  //     // console.log(666, typeof id);
+  //     let question = await dbInstance.getSelectedQuestion(id);
+  //     // console.log('survey/w/qs', survey);
+  //     res.send(question);
+  //   } catch (error) {
+  //     res.status(500).send(error);
+  //     console.log('error getting selected Question', error);
+  //   }
+  // }
+  // getOptions: async (req, res) => {
+  //   try {
+  //     let dbInstance = req.app.get('db');
+  //     const { id } = req.params;
+  //     let options = await dbInstance.getSurveyOptions(id);
+  //     res.send(options);
+  //   } catch (error) {
+  //     res.status(500).send(error);
+  //     console.log('error getting selected Options', error);
+  //   }
+  // }
   // getSurvayQuestions: async (req, res) => {
   //   try {
   //     let dbInstance = req.app.get('db');

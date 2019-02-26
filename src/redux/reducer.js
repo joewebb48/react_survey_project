@@ -3,12 +3,14 @@ const ADMIN_LOGGED_OUT = 'ADMIN_LOGGED_OUT';
 const SET_SURVEYS = 'SET_SURVEYS';
 const SET_SURVEY = 'SET_SURVEY';
 const SET_SURVEY_BY_ID = 'SET_SURVEY_BY_ID';
+const UPDATE_QUESTIONS = 'UPDATE_QUESTIONS';
 
 const initialAdminState = {
   isAuthenticated: false,
   admin: {},
   surveys: [],
-  survey: {}
+  survey: {},
+  questions: []
 };
 
 // const initSurvey = {
@@ -18,7 +20,7 @@ const initialAdminState = {
 // };
 
 export default function reducer(state = initialAdminState, action) {
-  console.log('reducer hit');
+  // console.log('reducer hit');
   switch (action.type) {
     case ADMIN_LOGGED_IN:
       return { ...state, isAuthenticated: true, admin: action.payload };
@@ -34,6 +36,9 @@ export default function reducer(state = initialAdminState, action) {
 
     case SET_SURVEY_BY_ID:
       return { ...state, survey: action.payload };
+
+    case UPDATE_QUESTIONS:
+      return { ...state, questions: action.payload };
     default:
       return state;
   }
@@ -59,7 +64,7 @@ export function setSurveys(surveys) {
   };
 }
 export function setSurvey(survey) {
-  console.log('action', survey);
+  // console.log('action', survey);
   return {
     type: SET_SURVEY,
     payload: survey
@@ -69,5 +74,11 @@ export function setSurveyById(xid) {
   return {
     type: SET_SURVEY_BY_ID,
     payload: xid
+  };
+}
+export function updateQuestions(questions) {
+  return {
+    type: UPDATE_QUESTIONS,
+    payload: questions
   };
 }

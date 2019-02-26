@@ -4,11 +4,9 @@ import CheckBoxOptionField from '../CheckBoxOptionField';
 export default class Checkbox extends Component {
   render() {
     // console.log('cb:', this.props);
-    // console.log('cbq:', this.props.question);
-    // console.log('cbqc:', this.props.question.options);
     const { question_id, question_title, title, options } = this.props.question;
-    // const { content, options_id } = this.props.question.options;
-    // console.log(this.props.options);
+    const { type } = this.props;
+    const { selectedQuestion } = this.props;
 
     const mappedOptions = this.props.options
       ? this.props.options.map((option, i) => {
@@ -17,7 +15,11 @@ export default class Checkbox extends Component {
         })
       : '';
     return (
-      <div>
+      <div
+        onClick={() => {
+          selectedQuestion(this.props.question);
+        }}
+      >
         <div>
           <h1>{question_title}</h1>
         </div>

@@ -17,7 +17,8 @@ export default class EditSurveyPage extends Component {
       s_subtitle: subTitle,
       updateSurveyTitle,
       updateSurveySubTitle,
-      saveChangesKeyPress
+      saveChangesKeyPress,
+      saveChanges
     } = this.props;
     return (
       <div>
@@ -45,6 +46,7 @@ export default class EditSurveyPage extends Component {
             onKeyPress={e => saveChangesKeyPress(e)}
           />
         </div>
+        <button onClick={e => saveChanges(e)}>Submit</button>
       </div>
     );
   }
