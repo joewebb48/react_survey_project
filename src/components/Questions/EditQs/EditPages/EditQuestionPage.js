@@ -23,9 +23,10 @@ export default class EditQuestionPage extends Component {
       question_id,
       question_title
     } = props.selectedQuestionObject;
+    const { selectedQuestionObject } = this.props;
     this.setState({
       findType: type_id,
-      Q: question,
+      Q: selectedQuestionObject,
       Options: options,
       Q_title: question_title,
       Q_ID: question_id
@@ -33,19 +34,29 @@ export default class EditQuestionPage extends Component {
   }
 
   render() {
+    // console.log('EQP: PROPS:', this.props);
+    // console.log('EQP: STATE:', this.state);
     const mappedEditQuestion = type => {
-      const { question, updateQuestion, updateQuestionTitle } = this.props;
+      const {
+        question,
+        updateQuestion,
+        updateQuestionTitle,
+        addNewOption,
+        deleteOption
+      } = this.props;
       const { Q, findType, Options, Q_title, Q_ID } = this.state;
       switch (type) {
         case 1:
           return (
             <MultipleChoiceEditor
               {...question}
-              question={Q}
+              question={this.props.selectedQuestionObject}
               options={Options}
               questionTitle={Q_title}
               updateQuestion={updateQuestion}
               updateQuestionTitle={updateQuestionTitle}
+              // addNewOption={addNewOption}
+              // deleteOption={deleteOption}
             />
           );
 
@@ -53,11 +64,13 @@ export default class EditQuestionPage extends Component {
           return (
             <MultipleChoiceEditor
               {...question}
-              question={Q}
+              question={this.props.selectedQuestionObject}
               options={Options}
               questionTitle={Q_title}
               updateQuestion={updateQuestion}
               updateQuestionTitle={updateQuestionTitle}
+              // addNewOption={addNewOption}
+              // deleteOption={deleteOption}
             />
           );
 
@@ -65,11 +78,13 @@ export default class EditQuestionPage extends Component {
           return (
             <MultipleChoiceEditor
               {...question}
-              question={Q}
+              question={this.props.selectedQuestionObject}
               options={Options}
               updateQuestion={updateQuestion}
               questionTitle={Q_title}
               updateQuestionTitle={updateQuestionTitle}
+              // addNewOption={addNewOption}
+              // deleteOption={deleteOption}
             />
           );
 
@@ -77,7 +92,7 @@ export default class EditQuestionPage extends Component {
           return (
             <TextEditor
               {...question}
-              question={Q}
+              question={this.props.selectedQuestionObject}
               options={Options}
               updateQuestion={updateQuestion}
               questionTitle={Q_title}
@@ -89,7 +104,7 @@ export default class EditQuestionPage extends Component {
           return (
             <TextEditor
               {...question}
-              question={Q}
+              question={this.props.selectedQuestionObject}
               options={Options}
               updateQuestion={updateQuestion}
               questionTitle={Q_title}
@@ -105,7 +120,7 @@ export default class EditQuestionPage extends Component {
     // console.log(mappedEditQuestion());
     return (
       <div>
-        <h3>Edit Question</h3>
+        <h1>Edit Question</h1>
         {mappedEditQuestion(this.state.findType)}
       </div>
     );

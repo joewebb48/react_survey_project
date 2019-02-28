@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+
+import Button from '@material-ui/core/Button';
+
+import axios from 'axios';
 
 export default class TextEditor extends Component {
-  // update() {
-  //   var value = {
-  //     title: this.title.value,
-  //     placeholder: this.placeholder.value
-  //   };
-  //   this.props.updateQuestion(this.props._id, value);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      newQuestionTitle: ''
+    };
+  }
+  handleChange = value => {
+    this.setState({
+      newQuestionTitle: value
+    });
+  };
+  editQuestionTitle = title => {
+    console.log('title', title);
+    const { question_id } = this.props.question;
+    axios.put(`/api/editQuestionTitle/${question_id}`, { title }).then(res => {
+      console.log('edit question res', res.data);
+    });
+  };
   render() {
     console.log('text editor', this.props);
     const {
@@ -16,33 +34,40 @@ export default class TextEditor extends Component {
       updateQuestion,
       updateQuestionTitle
     } = this.props;
+    const {
+      question_id,
+      question_title,
+      subtitle,
+      type_id
+    } = this.props.question;
     return (
       <div>
-        <form>
-          <h4>{questionTitle}</h4>
-          <label>Edit Question Title</label>
-          <input
-            type='text'
-            value={options.content}
-            // placeholder={options.content}
-            // ref={node => {
-            //   this.title = node;
-            // }}
-            // onChange={() => this.update()}
-          />
-        </form>
+        <Card>
+          <CardContent>
+            <h4>{questionTitle}</h4>
+            <label>Edit Question Title</label>
+            <br />
+            <TextField
+              id='standard-name'
+              margin='normal'
+              type='text'
+              value={options.content}
+              onChange={e => this.handleChange(e.target.value)}
+            />
+            <br />
+          </CardContent>
+          <br />
+          <Button
+            style={{ margin: '15px' }}
+            variant='contained'
+            size='small'
+            color='primary'
+            onClick={() => this.editQuestionTitle(this.state.newQuestionTitle)}
+          >
+            Save Title Edit
+          </Button>
+        </Card>
       </div>
     );
   }
 }
-// import React from 'react';
-
-// export default function TextEditor(props) {
-//   const wut = !props ? '' : console.log(props);
-//   return (
-//     <div>
-//       <h3>Text Editor</h3>
-//       {wut}
-//     </div>
-//   );
-// }

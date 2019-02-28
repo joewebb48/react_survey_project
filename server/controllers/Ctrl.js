@@ -7,10 +7,6 @@ module.exports = {
       console.log('req.body', req.body);
       const { question_title, question_id } = req.body;
       console.log('rstuff', question_title, question_id);
-      // let surveyResponse = await dbInstance.getSurvey(id);
-      // let survey = surveyResponse[0];
-
-      // res.send(survey);
     } catch (error) {
       console.log('error getting surveys:', error);
       res.status(500).send(error);
@@ -20,9 +16,7 @@ module.exports = {
     try {
       let dbInstance = req.app.get('db');
       const { admin_id } = req.session.admin;
-      // console.log(admin_id);
       let surveys = await dbInstance.getAdminSurveys(admin_id);
-      // console.log('get all surveys ctrl:', surveys);
       res.send(surveys);
     } catch (error) {
       console.log('error getAllAdminSurveys:', error);
@@ -33,9 +27,7 @@ module.exports = {
     try {
       let dbInstance = req.app.get('db');
       const { id } = req.params;
-      // console.log(666, typeof id);
       let survey = await dbInstance.getSurvayWithQuestions(id);
-      // console.log('survey/w/qs', survey);
       res.send(survey);
     } catch (error) {
       console.log('error getSingleSurveys:', error);
@@ -142,43 +134,45 @@ module.exports = {
       res.status(500).send(error);
       console.log('error saving title and/or subtitle', error);
     }
+  },
+  addNewOption: async (req, res) => {
+    try {
+      let dbInstance = req.app.get('db');
+      let { id } = req.params;
+      let newOption = await dbInstance.addOptionToSurvey([
+        'New Option',
+        null,
+        id
+      ]);
+      res.send(newOption);
+    } catch (error) {
+      res.status(500).send(error);
+      console.log('error adding new option', error);
+    }
+  },
+  deleteOption: async (req, res) => {
+    try {
+      let dbInstance = req.app.get('db');
+      let { id } = req.params;
+      // console.log(id);
+      let deleteOption = await dbInstance.deleteOption(id);
+      res.send(deleteOption);
+    } catch (error) {
+      res.status(500).send(error);
+      console.log('error deleting option', error);
+    }
+  },
+  editQuestionTitle: async (req, res) => {
+    try {
+      let dbInstance = req.app.get('db');
+      let { id } = req.params;
+      let { title } = req.body;
+      // console.log(title);
+      let editQuestionTitle = await dbInstance.editQuestionTitle([id, title]);
+      res.send(editQuestionTitle);
+    } catch (error) {
+      res.status(500).send(error);
+      console.log('error deleting optionediting question title', error);
+    }
   }
-  // selectedQuestion: async (req, res) => {
-  //   console.log(`we hit selectedQ`);
-  //   try {
-  //     let dbInstance = req.app.get('db');
-  //     const { id } = req.params;
-  //     // console.log(666, typeof id);
-  //     let question = await dbInstance.getSelectedQuestion(id);
-  //     // console.log('survey/w/qs', survey);
-  //     res.send(question);
-  //   } catch (error) {
-  //     res.status(500).send(error);
-  //     console.log('error getting selected Question', error);
-  //   }
-  // }
-  // getOptions: async (req, res) => {
-  //   try {
-  //     let dbInstance = req.app.get('db');
-  //     const { id } = req.params;
-  //     let options = await dbInstance.getSurveyOptions(id);
-  //     res.send(options);
-  //   } catch (error) {
-  //     res.status(500).send(error);
-  //     console.log('error getting selected Options', error);
-  //   }
-  // }
-  // getSurvayQuestions: async (req, res) => {
-  //   try {
-  //     let dbInstance = req.app.get('db');
-  //     // let { id } = req.params;
-  //     const { survay_id: id } = req.params;
-  //     let questions = await dbInstance.getSurvayQuestions(id);
-  //     // console.log('get all surveys ctrl:', surveys);
-  //     res.send(questions);
-  //   } catch (error) {
-  //     console.log('error getSurvayQuestions:', error);
-  //     res.status(500).send(error);
-  //   }
-  // }
 };

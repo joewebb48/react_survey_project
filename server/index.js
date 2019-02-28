@@ -58,12 +58,15 @@ app.put(`/api/saveSurveyChanges/:id`, Ctrl.saveTitleandSubtitle);
 //QUESTIONS.
 app.post(`/api/question/:id`, Ctrl.addQuestion);
 app.post(`/api/saveAddedQuestions/:id`, Ctrl.saveAddedQuestions);
+app.put(`/api/editQuestionTitle/:id`, Ctrl.editQuestionTitle);
 //
 // app.get(`/api/selectedQuestion/:id`, Ctrl.selectedQuestion);
 //
 // app.get(`/api/questions/:id`, Ctrl.getSurvayQuestions);
 //OPTIONS
 app.get(`/api/options/:id`, Ctrl.getOptions);
+app.post(`/api/addNewOption/:id`, Ctrl.addNewOption);
+app.delete(`/api/deleteOption/:id`, Ctrl.deleteOption);
 
 const SERVER_PORT = process.env.SERVER_PORT;
 app.listen(SERVER_PORT, () => {

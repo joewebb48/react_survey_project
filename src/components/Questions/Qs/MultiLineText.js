@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TextField from '@material-ui/core/TextField';
 
 export default class MultiLineText extends Component {
   render() {
@@ -14,14 +15,34 @@ export default class MultiLineText extends Component {
       >
         <h1 className=''>{question_title}</h1>
         <div className='f'>
-          <textarea
-            type='textarea'
+          <TextField
+            id='outlined-textarea'
+            placeholder={`Content...`}
+            // label='Content...'
+            // placeholder='Placeholder'
+            InputProps={{
+              readOnly: true
+            }}
+            margin='normal'
+            variant='outlined'
+            // type='textarea'
             className='f'
-            placeholder={`Wont Access Content :(`}
+            // placeholder={`Content...`}
             name={question_id}
           />
         </div>
       </div>
     );
   }
+}
+{
+  /* <TextField
+          id="outlined-textarea"
+          label="Multiline Placeholder"
+          placeholder="Placeholder"
+          multiline
+          className={classes.textField}
+          margin="normal"
+          variant="outlined"
+        /> */
 }

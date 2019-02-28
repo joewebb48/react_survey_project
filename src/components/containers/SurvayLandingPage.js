@@ -5,6 +5,22 @@ import axios from 'axios';
 import SurveyPreview from '../Survey/SurveyPreview/SurvayPreview';
 import { connect } from 'react-redux';
 import { updateQuestions } from '../../redux/reducer';
+import Paper from '@material-ui/core/Paper';
+
+const paperStyle = {
+  // height: '%',
+  width: '55%',
+  margin: '7%',
+  textAlign: 'center',
+  display: 'inline-block'
+};
+const editPaperStyle = {
+  // height: '750px',
+  width: '35%',
+  margin: '7%',
+  textAlign: 'center',
+  display: 'inline-block'
+};
 
 class SurveyLandingPage extends Component {
   constructor(props) {
@@ -21,7 +37,7 @@ class SurveyLandingPage extends Component {
     };
   }
   componentDidMount() {
-    console.log('does this crap work');
+    // console.log('does this crap work');
     axios
       .get(`/api/survey/${this.props.match.params.surveyId}`)
       .then(firstRes => {
@@ -112,9 +128,27 @@ class SurveyLandingPage extends Component {
       selectedQuestionObject: value
     });
   };
-
+  // addNewOption = ()=>{
+  //   axios.post(`/api/newOption/${'questionID'}`)
+  // }
+  //
+  // addNewOption = id => {
+  //   // this.props.question.question_id
+  //   axios.post(`/api/addNewOption/${id}`).then(res => {
+  //     console.log(res);
+  //   });
+  // };
+  // deleteOption = id => {
+  //   // console.log(id); <- question ID
+  //   axios.delete(`/api/deleteOption/${id}`).then(res => {
+  //     console.log(`delete option returning`, res.data);
+  //   });
+  // };
+  //
+  //
   render() {
-    console.log('SLP state:', this.state);
+    // console.log('SLP state:', this.state);
+    // console.log('SLP props:', this.props);
     const {
       s_title,
       s_subtitle,
@@ -122,27 +156,39 @@ class SurveyLandingPage extends Component {
       questions
     } = this.state;
     return (
-      <div>
-        <SurveyPreview
-          s_title={s_title}
-          s_subtitle={s_subtitle}
-          selectedQuestion={this.activeQuestion}
-          questions={questions}
-        />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-around'
+        }}
+      >
+        <Paper style={paperStyle}>
+          <SurveyPreview
+            s_title={s_title}
+            s_subtitle={s_subtitle}
+            selectedQuestion={this.activeQuestion}
+            questions={questions}
+          />
+        </Paper>
 
-        <EditContainer
-          s_title={s_title}
-          s_subtitle={s_subtitle}
-          selectedQuestionObject={selectedQuestionObject}
-          questions={questions}
-          addToQuestions={this.addToQuestions}
-          updateSurveyTitle={this.updateSurveyTitle}
-          updateSurveySubTitle={this.updateSurveySubTitle}
-          updateQuestionTitle={this.updateQuestionTitle}
-          updateQuestion={this.updateQuestion}
-          saveChangesKeyPress={this.saveChangesKeyPress}
-          saveChanges={this.saveChanges}
-        />
+        <Paper style={editPaperStyle}>
+          <EditContainer
+            s_title={s_title}
+            s_subtitle={s_subtitle}
+            selectedQuestionObject={selectedQuestionObject}
+            questions={questions}
+            addToQuestions={this.addToQuestions}
+            updateSurveyTitle={this.updateSurveyTitle}
+            updateSurveySubTitle={this.updateSurveySubTitle}
+            updateQuestionTitle={this.updateQuestionTitle}
+            updateQuestion={this.updateQuestion}
+            saveChangesKeyPress={this.saveChangesKeyPress}
+            saveChanges={this.saveChanges}
+            // addNewOption={this.addNewOption}
+            // deleteOption={this.deleteOption}
+          />
+        </Paper>
       </div>
     );
   }

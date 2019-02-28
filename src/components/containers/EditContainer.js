@@ -3,6 +3,10 @@ import axios from 'axios';
 import AddQuestionPage from '../Questions/EditQs/EditPages/AddQuestionPage';
 import EditQuestionPage from '../Questions/EditQs/EditPages/EditQuestionPage';
 import EditSurveyPage from '../Questions/EditQs/EditPages/EditSurveyPage';
+import Button from '@material-ui/core/Button';
+// import HUE from '@material-ui/core/colors/HUE';
+
+// const color = HUE[SHADE];
 
 export default class EditContainer extends Component {
   constructor() {
@@ -31,14 +35,23 @@ export default class EditContainer extends Component {
       updateSurveySubTitle,
       saveChangesKeyPress,
       updateSurveyTitle,
+      addNewOption,
+      deleteOption,
       saveChanges
     } = this.props;
     return (
       <div>
-        <h2>Edit Survey Page</h2>
+        <h2>Edit Survey</h2>
 
         <div>
-          <button onClick={() => this.updateTab(1)}>Add Question</button>
+          <Button
+            color='#00e676'
+            variant='contained'
+            size='medium'
+            onClick={() => this.updateTab(1)}
+          >
+            Add Question
+          </Button>
           {this.state.selectedTab === 1 ? (
             <div>
               <AddQuestionPage addToQuestions={addToQuestions} />
@@ -49,7 +62,14 @@ export default class EditContainer extends Component {
         </div>
         <br />
         <div>
-          <button onClick={() => this.updateTab(2)}>Edit Question Tab</button>
+          <Button
+            color='#00e676'
+            variant='contained'
+            size='medium'
+            onClick={() => this.updateTab(2)}
+          >
+            Edit Question Tab
+          </Button>
           {this.state.selectedTab === 2 ? (
             <div>
               <EditQuestionPage
@@ -59,6 +79,8 @@ export default class EditContainer extends Component {
                 selectedQuestionObject={selectedQuestionObject}
                 updateQuestion={updateQuestion}
                 updateQuestionTitle={updateQuestionTitle}
+                // addNewOption={addNewOption}
+                // deleteOption={deleteOption}
               />
             </div>
           ) : (
@@ -67,7 +89,14 @@ export default class EditContainer extends Component {
         </div>
         <br />
         <div>
-          <button onClick={() => this.updateTab(3)}>Edit Survey Tab</button>
+          <Button
+            color='#00e676'
+            variant='contained'
+            size='medium'
+            onClick={() => this.updateTab(3)}
+          >
+            Edit Survey Tab
+          </Button>
           {this.state.selectedTab === 3 ? (
             <div>
               <EditSurveyPage

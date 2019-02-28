@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import TextField from '@material-ui/core/TextField';
 
 export default class SingleLineText extends Component {
   render() {
@@ -15,10 +16,16 @@ export default class SingleLineText extends Component {
       >
         <h1 className=''>{question_title}</h1>
         <div className='f'>
-          <input
+          <TextField
+            id='outlined-read-only-input'
+            margin='normal'
+            variant='outlined'
+            InputProps={{
+              readOnly: true
+            }}
             type='text'
             className='f'
-            placeholder={`Cant access content if my life depended on it`}
+            placeholder={`Content...`}
             name={question_id}
           />
         </div>

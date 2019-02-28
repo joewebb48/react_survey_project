@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 export default class EditSurveyPage extends Component {
   // updateTitle() {
@@ -22,31 +26,46 @@ export default class EditSurveyPage extends Component {
     } = this.props;
     return (
       <div>
-        <h1>Edit Survey</h1>
-        <div>
-          <label>Title</label>
-          <input
-            type='text'
-            value={title}
-            ref={input => {
-              this.title = input;
-            }}
-            onChange={e => updateSurveyTitle(e.target.value)}
-            onKeyPress={e => saveChangesKeyPress(e)}
-          />
-        </div>
-        <div>
-          <label>SubTitle</label>
-          <textarea
-            value={subTitle}
-            ref={input => {
-              this.subTitle = input;
-            }}
-            onChange={e => updateSurveySubTitle(e.target.value)}
-            onKeyPress={e => saveChangesKeyPress(e)}
-          />
-        </div>
-        <button onClick={e => saveChanges(e)}>Submit</button>
+        <Card>
+          <CardContent>
+            <h1>Edit Survey</h1>
+            <div>
+              <label>Enter New Title</label>
+              <TextField
+                id='standard-name'
+                margin='normal'
+                type='text'
+                value={title}
+                ref={input => {
+                  this.title = input;
+                }}
+                onChange={e => updateSurveyTitle(e.target.value)}
+                onKeyPress={e => saveChangesKeyPress(e)}
+              />
+            </div>
+            <div>
+              <label>Enter New Subtitle</label>
+              <TextField
+                id='standard-name'
+                margin='normal'
+                value={subTitle}
+                ref={input => {
+                  this.subTitle = input;
+                }}
+                onChange={e => updateSurveySubTitle(e.target.value)}
+                onKeyPress={e => saveChangesKeyPress(e)}
+              />
+            </div>
+            <Button
+              variant='contained'
+              size='small'
+              color='primary'
+              onClick={e => saveChanges(e)}
+            >
+              Submit
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
