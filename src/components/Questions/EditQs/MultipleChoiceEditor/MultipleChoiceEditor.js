@@ -4,6 +4,7 @@ import MultiChoiceOptionField from '../../MultiChoiceOptionField';
 // import CheckBoxOptionField from '../../CheckBoxOptionField';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import green from '@material-ui/core/colors/green';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
@@ -104,7 +105,8 @@ class MultipleChoiceEditor extends Component {
 
               <Fab
                 style={{ margin: '15px' }}
-                color='secondary'
+                color={green}
+                // color='green'
                 aria-label='Add'
                 onClick={this.addNewOption}
               >

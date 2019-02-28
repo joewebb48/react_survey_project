@@ -21,6 +21,8 @@ massive(CONNECTION_STRING)
 
 app.use(bodyParser.json());
 
+app.use(express.static(`${__dirname}/../build`));
+
 app.use(
   session({
     secret: SESSION_SECRET,
