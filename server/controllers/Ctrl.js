@@ -34,6 +34,32 @@ module.exports = {
       res.status(500).send(error);
     }
   },
+  //
+  //
+  //
+
+  getSurveyWithQuestionAndOptions: async (req, res) => {
+    try {
+      let dbInstance = req.app.get('db');
+      const { surveyID } = req.params;
+      let surveyInformation = await dbInstance.getSingleSurvey(surveyID);
+      let allQuestions = await dbInstance.getQuestion(surveyID);
+      for (let i = 0; i < allQuestions.length; i++) {
+        let questionId = allQuestions[i].question_id;
+
+        let getOptions = await dbInstance.getOptionsForQuestion(questionId);
+        allQuestions[i].options = getOptions;
+        allQuestions[i].surveyInfo = surveyInformation;
+      }
+      console.log(surveyID);
+      console.log('allQuestions', allQuestions);
+      res.send(allQuestions);
+    } catch (error) {
+      console.log('Error Getting Survey With Questions and Options:', error);
+      res.status(500).send(error);
+    }
+  },
+
   getOptions: async (req, res) => {
     try {
       let dbInstance = req.app.get('db');
@@ -173,6 +199,19 @@ module.exports = {
     } catch (error) {
       res.status(500).send(error);
       console.log('error deleting optionediting question title', error);
+    }
+  },
+  deleteQuestion: async (req, res) => {
+    try {
+      let dbInstance = req.app.get('db');
+      let { id } = req.params;
+      // console.log('req.body in delete question', req.params);
+
+      let deleteQuestion = await dbInstance.deleteQuestion([id]);
+      res.send(deleteQuestion);
+    } catch (error) {
+      res.status(500).send(error);
+      console.log('error deleting Question', error);
     }
   }
 };

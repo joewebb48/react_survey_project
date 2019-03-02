@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { QuestionTypes } from '../../../Constant/ConstantQuestions';
 import MultipleChoiceEditor from '../MultipleChoiceEditor/MultipleChoiceEditor';
-
+import Typography from '@material-ui/core/Typography';
 import TextEditor from '../TextEditor/TextEditor';
 
 export default class EditQuestionPage extends Component {
@@ -24,7 +24,7 @@ export default class EditQuestionPage extends Component {
       question_id,
       question_title
     } = props.selectedQuestionObject;
-    const { selectedQuestionObject } = this.props;
+    const { selectedQuestionObject, deleteQuestion } = this.props;
     this.setState({
       findType: type_id,
       Q: selectedQuestionObject,
@@ -56,6 +56,7 @@ export default class EditQuestionPage extends Component {
               questionTitle={Q_title}
               updateQuestion={updateQuestion}
               updateQuestionTitle={updateQuestionTitle}
+              deleteQuestion={this.props.deleteQuestion}
               // addNewOption={addNewOption}
               // deleteOption={deleteOption}
             />
@@ -70,6 +71,7 @@ export default class EditQuestionPage extends Component {
               questionTitle={Q_title}
               updateQuestion={updateQuestion}
               updateQuestionTitle={updateQuestionTitle}
+              deleteQuestion={this.props.deleteQuestion}
               // addNewOption={addNewOption}
               // deleteOption={deleteOption}
             />
@@ -84,6 +86,7 @@ export default class EditQuestionPage extends Component {
               updateQuestion={updateQuestion}
               questionTitle={Q_title}
               updateQuestionTitle={updateQuestionTitle}
+              deleteQuestion={this.props.deleteQuestion}
               // addNewOption={addNewOption}
               // deleteOption={deleteOption}
             />
@@ -98,6 +101,7 @@ export default class EditQuestionPage extends Component {
               updateQuestion={updateQuestion}
               questionTitle={Q_title}
               updateQuestionTitle={updateQuestionTitle}
+              deleteQuestion={this.props.deleteQuestion}
             />
           );
 
@@ -110,6 +114,7 @@ export default class EditQuestionPage extends Component {
               updateQuestion={updateQuestion}
               questionTitle={Q_title}
               updateQuestionTitle={updateQuestionTitle}
+              deleteQuestion={this.props.deleteQuestion}
             />
           );
 
@@ -121,7 +126,9 @@ export default class EditQuestionPage extends Component {
     // console.log(mappedEditQuestion());
     return (
       <div>
-        <h1>Edit Question</h1>
+        <Typography color='primary' component='h1'>
+          <h1>Edit Question</h1>
+        </Typography>
         {mappedEditQuestion(this.state.findType)}
       </div>
     );

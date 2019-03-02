@@ -4,15 +4,18 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import NewSurveyContainer from '../Survey/NewSurvey/NewSurveyContainer';
 import SurveyListContainer from '../Survey/SurveyList/SurveyListContainer';
+
+import Typography from '@material-ui/core/Typography';
 // import SurveyForm from './SurveyForm';
 
 class AdminLanding extends Component {
   render() {
     return this.props.isAuthenticated ? (
       <div>
-        <h1>Admin Landing</h1>
+        <Typography color='primary' component='h1'>
+          <h1 className='websiteTitle'>WELCOME TO FREE SURVEY BUILDER</h1>
+        </Typography>
         <NewSurveyContainer />
-        <h3>List?</h3>
         <SurveyListContainer />
       </div>
     ) : (

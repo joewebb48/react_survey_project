@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import { setSurvey } from '../../../redux/reducer';
 import { withRouter } from 'react-router-dom';
@@ -100,16 +101,21 @@ class NewSurveyContainer extends Component {
   render() {
     return (
       <div>
-        <div>Create New Survey</div>
-        <button
+        {/* <Typography color='primary' component='h1'>
+          <div>Create New Survey</div>
+        </Typography> */}
+        <Button
+          variant='contained'
+          size='large'
+          color='primary'
           className='newSurveyButton'
           onClick={() => {
             this.handleClick();
           }}
           disabled={this.props.isLoading}
         >
-          {this.props.isLoading ? 'Loading...' : 'New Survey'}
-        </button>
+          {this.props.isLoading ? 'Loading...' : 'Create New Survey'}
+        </Button>
       </div>
     );
   }

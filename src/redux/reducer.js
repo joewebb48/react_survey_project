@@ -10,7 +10,8 @@ const initialAdminState = {
   admin: {},
   surveys: [],
   survey: {},
-  questions: []
+  questions: [],
+  options: []
 };
 
 // const initSurvey = {

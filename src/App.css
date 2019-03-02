@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: lightgray;
+  height: 100%;
 }
 
 .App-logo {
@@ -18,6 +20,15 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.mobileHeaderNavbar {
+  display: none;
+}
+.websiteTitle {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.editTabType {
+  width: 80%;
+}
 
 .App-link {
   color: #61dafb;
@@ -29,5 +40,23 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* //MEDIA  */
+
+@media (max-width: 600px) {
+  .headerNavWide {
+    display: none;
+  }
+  .mobileHeaderNavbar {
+    display: block;
+  }
+  .websiteTitle {
+    line-height: 35px;
+    font-size: 32px;
+  }
+  .editTabType {
+    width: 50%;
   }
 }

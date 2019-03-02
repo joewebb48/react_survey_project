@@ -64,22 +64,37 @@ class MultipleChoiceEditor extends Component {
     });
   };
   render() {
-    console.log('MCEDITOR PROPS:', this.props);
+    // console.log('MCEDITOR PROPS:', this.props);
     const {
       options,
       questionTitle,
       updateQuestion,
-      updateQuestionTitle
+      updateQuestionTitle,
+      deleteQuestion
     } = this.props;
     return (
       <div>
         <Card>
           <CardContent>
-            <Typography>
-              <h2>{questionTitle}</h2>
+            <div>
+              <IconButton
+                aria-label='Delete'
+                label='Delete Survey'
+                color='secondary'
+                onClick={() => deleteQuestion(this.props.question.question_id)}
+              >
+                <DeleteIcon fontSize='small' />
+                <Typography color='secondary'>
+                  <h6>Delete Question</h6>
+                </Typography>
+              </IconButton>
+            </div>
+            <Typography color='primary'>
+              <h1>{questionTitle}</h1>
             </Typography>
             <div>
               {/* <label>Edit Question Title</label> */}
+
               <div>
                 <TextField
                   id='standard-name'

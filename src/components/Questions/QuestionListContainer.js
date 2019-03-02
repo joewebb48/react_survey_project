@@ -7,7 +7,6 @@ import MultipleChoice from './Qs/MultipleChoice';
 import EditDrowpdown from './EditQs/EditDropdown';
 
 export default function QuestionListContainer(props) {
-  // console.log('p', props);
   const { q_title, q_type, questions } = props;
   const { selectedQuestion } = props;
 

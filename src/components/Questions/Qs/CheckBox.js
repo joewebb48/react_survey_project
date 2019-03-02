@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import CheckBoxOptionField from '../CheckBoxOptionField';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Typography from '@material-ui/core/Typography';
 
 export default class Checkbox extends Component {
   render() {
@@ -21,7 +24,12 @@ export default class Checkbox extends Component {
         }}
       >
         <div>
-          <h1>{question_title}</h1>
+          <Typography color='primary'>
+            <h1>{question_title}</h1>
+          </Typography>
+          {/* <IconButton aria-label='Delete' label='Delete Survey'>
+            <DeleteIcon fontSize='small' />
+          </IconButton> */}
         </div>
         {mappedOptions}
         <br />

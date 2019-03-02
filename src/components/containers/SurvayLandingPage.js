@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { InitQuestions } from '../Constant/ConstantQuestions';
 import EditContainer from '../containers/EditContainer';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import SurveyPreview from '../Survey/SurveyPreview/SurvayPreview';
 import { connect } from 'react-redux';
@@ -30,44 +31,70 @@ class SurveyLandingPage extends Component {
       s_title: '',
       s_subtitle: '',
       question_title: '',
-      options: [],
       selectedQuestion: 0,
       selectedQuestionObject: {},
       questions: []
     };
   }
+  // componentDidMount() {
+  //   // console.log('does this crap work');
+  // axios
+  //   .get(`/api/survey/${this.props.match.params.surveyId}`)
+  //   .then(firstRes => {
+  //     console.log('firstRes', firstRes.data);
+  //     this.setState({
+  //       questions: firstRes.data
+  //       // options: firstRes.data.options,
+  //       // s_title: firstRes.data[0].survey_title,
+  //       // s_subtitle: firstRes.data[0].subtitle
+  //     });
+  //       let promises = [];
+  //       firstRes.data
+  //         .forEach((item, i) => {
+  //           axios.get(`/api/options/${item.question_id}`).then(res => {
+  //             console.log('options red', res);
+  //             let questions = this.state.questions;
+  //             questions[i].options = res.data;
+  //             // console.log('finding options', questions[i]);
+  //             this.setState({
+  //               questions: questions
+  //               // options: questions[i].options
+  //             });
+  //           });
+  //         })
+  //         .catch(err => {
+  //           console.log('axios.get options', err);
+  //         });
+  //       axios.all(promises).then((secondRes, i) => {
+  //         console.log('second res', secondRes);
+  //         const optionInfo = [];
+  //         secondRes.forEach((item, i) => {
+  //           optionInfo.push(item.data);
+  //         });
+  //       });
+
+  //       this.setState({
+  //         s_title: firstRes.data[0].survey_title,
+  //         s_subtitle: firstRes.data[0].subtitle
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log('axios.get survey', err);
+  //     });
+  // }
   componentDidMount() {
-    // console.log('does this crap work');
     axios
-      .get(`/api/survey/${this.props.match.params.surveyId}`)
+      .get(`/api/getFullSurvey/${this.props.match.params.surveyId}`)
       .then(firstRes => {
-        console.log('firstRes', firstRes.data);
+        // console.log('firstRes', firstRes.data);
         this.setState({
-          questions: firstRes.data
+          questions: firstRes.data,
+          s_title: firstRes.data[0].surveyInfo[0].title,
+          s_subtitle: firstRes.data[0].surveyInfo[0].subtitle
         });
-
-        let promises = [];
-        firstRes.data.forEach((item, i) => {
-          axios.get(`/api/options/${item.question_id}`).then(res => {
-            let questions = this.state.questions;
-            questions[i].options = res.data;
-            this.setState({
-              questions: questions
-            });
-          });
-        });
-        axios.all(promises).then((secondRes, i) => {
-          console.log('second res', secondRes);
-          const optionInfo = [];
-          secondRes.forEach((item, i) => {
-            optionInfo.push(item.data);
-          });
-        });
-
-        this.setState({
-          s_title: firstRes.data[0].survey_title,
-          s_subtitle: firstRes.data[0].subtitle
-        });
+      })
+      .catch(err => {
+        console.log('axios.get options', err);
       });
   }
   addToQuestions = value => {
@@ -128,26 +155,18 @@ class SurveyLandingPage extends Component {
       selectedQuestionObject: value
     });
   };
-  // addNewOption = ()=>{
-  //   axios.post(`/api/newOption/${'questionID'}`)
-  // }
-  //
-  // addNewOption = id => {
-  //   // this.props.question.question_id
-  //   axios.post(`/api/addNewOption/${id}`).then(res => {
-  //     console.log(res);
-  //   });
-  // };
-  // deleteOption = id => {
-  //   // console.log(id); <- question ID
-  //   axios.delete(`/api/deleteOption/${id}`).then(res => {
-  //     console.log(`delete option returning`, res.data);
-  //   });
-  // };
-  //
-  //
+  deleteQuestion = id => {
+    const { options } = this.state;
+    console.log(id);
+    axios.delete(`/api/deleteQuestion/${id}`).then(res => {
+      console.log('please dont quit on me');
+      // this.setState({
+      //   options: { ...options }
+      // });
+    });
+  };
   render() {
-    // console.log('SLP state:', this.state);
+    console.log('SLP state questions:', this.state.questions);
     // console.log('SLP props:', this.props);
     const {
       s_title,
@@ -155,12 +174,13 @@ class SurveyLandingPage extends Component {
       selectedQuestionObject,
       questions
     } = this.state;
-    return (
+    return this.props.isAuthenticated ? (
       <div
         style={{
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'space-around'
+          // backgroundColor: 'light-grey'
         }}
       >
         <Paper style={paperStyle}>
@@ -177,6 +197,7 @@ class SurveyLandingPage extends Component {
             s_title={s_title}
             s_subtitle={s_subtitle}
             selectedQuestionObject={selectedQuestionObject}
+            deleteQuestion={this.deleteQuestion}
             questions={questions}
             addToQuestions={this.addToQuestions}
             updateSurveyTitle={this.updateSurveyTitle}
@@ -190,12 +211,17 @@ class SurveyLandingPage extends Component {
           />
         </Paper>
       </div>
+    ) : (
+      <Redirect to='/login' />
     );
   }
 }
 function mapStateToProps(reduxState) {
+  let { isAuthenticated, admin, questions } = reduxState;
   return {
-    questions: reduxState.questions
+    questions,
+    isAuthenticated,
+    admin
   };
 }
 export default connect(

@@ -3,6 +3,7 @@ import { QuestionDescription } from '../../../Constant/ConstantQuestions';
 import newId from '../../../../IdGenerator/idGenerator';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 // import { FlexBox } from '@material-ui/core/systems';
 
 const menuStyle = {
@@ -101,7 +102,9 @@ export default class AddQuestionPage extends Component {
       // display='flex' flexDirection='column'
 
       <div>
-        <h1>Add Question</h1>
+        <Typography color='primary' component='h1'>
+          <h1>Add Question</h1>
+        </Typography>
 
         <div
           style={{

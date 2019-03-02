@@ -13,6 +13,7 @@ const { CONNECTION_STRING, SESSION_SECRET, DEV } = process.env;
 
 massive(CONNECTION_STRING)
   .then(dbInstance => {
+    console.log('am i here');
     app.set('db', dbInstance);
   })
   .catch(err => {
@@ -30,18 +31,19 @@ app.use(
     saveUninitialized: true
   })
 );
-app.use((req, res, next) => {
-  if (DEV) {
-    if (req.session.admin) {
-      next();
-    } else {
-      req.session.admin = { admin_id: 43, email: 8 };
-      next();
-    }
-  } else {
-    next();
-  }
-});
+// app.use((req, res, next) => {
+//   if (DEV) {
+//     if (req.session.admin) {
+//       next();
+//     } else {
+//       req.session.admin = { admin_id: 43, email: 8 };
+//       next();
+//     }
+//   } else {
+//     next();
+//   }
+// });
+// DEV=anythignthatisastring <- for the ENV FILE
 
 //AUTH
 app.post('/auth/login', Auth_ctrl.login);
@@ -51,7 +53,8 @@ app.get('/auth/currentAdmin', Auth_ctrl.getCurrentAdmin);
 
 //SURVEYS
 // app.get(`/api/surveys/:id`, Ctrl.getSurvey);
-app.get(`/api/survey/:id`, Ctrl.getSingleSurvey);
+// app.get(`/api/survey/:id`, Ctrl.getSingleSurvey);
+app.get(`/api/getFullSurvey/:surveyID`, Ctrl.getSurveyWithQuestionAndOptions);
 app.get(`/api/surveys/:id`, Ctrl.getAllAdminSurveys);
 
 app.post(`/api/surveys`, Ctrl.createSurvey);
@@ -61,6 +64,7 @@ app.put(`/api/saveSurveyChanges/:id`, Ctrl.saveTitleandSubtitle);
 app.post(`/api/question/:id`, Ctrl.addQuestion);
 app.post(`/api/saveAddedQuestions/:id`, Ctrl.saveAddedQuestions);
 app.put(`/api/editQuestionTitle/:id`, Ctrl.editQuestionTitle);
+app.delete(`/api/deleteQuestion/:id`, Ctrl.deleteQuestion);
 //
 // app.get(`/api/selectedQuestion/:id`, Ctrl.selectedQuestion);
 //

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MultiChoiceOptionField from '../MultiChoiceOptionField';
+import Typography from '@material-ui/core/Typography';
 
 export default class MultipleChoice extends Component {
   render() {
@@ -21,7 +22,9 @@ export default class MultipleChoice extends Component {
         }}
       >
         <div>
-          <h1>{question_title}</h1>
+          <Typography color='primary'>
+            <h1>{question_title}</h1>
+          </Typography>
         </div>
         {mappedOptions}
       </div>

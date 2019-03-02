@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Typography from '@material-ui/core/Typography';
 
 export default class MultiLineText extends Component {
   render() {
@@ -13,7 +16,12 @@ export default class MultiLineText extends Component {
           selectedQuestion(this.props.question);
         }}
       >
-        <h1 className=''>{question_title}</h1>
+        <Typography color='primary'>
+          <h1 className=''>{question_title}</h1>
+        </Typography>
+        {/* <IconButton aria-label='Delete' label='Delete Survey'>
+          <DeleteIcon fontSize='small' />
+        </IconButton> */}
         <div className='f'>
           <TextField
             id='outlined-textarea'

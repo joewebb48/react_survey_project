@@ -36,7 +36,7 @@ type
 insert into questions (
 survey_id,
 title,
-type_id
+type_select id
 ) values (
     1,
     'question title 1',

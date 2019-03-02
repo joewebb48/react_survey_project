@@ -4,6 +4,7 @@ import AddQuestionPage from '../Questions/EditQs/EditPages/AddQuestionPage';
 import EditQuestionPage from '../Questions/EditQs/EditPages/EditQuestionPage';
 import EditSurveyPage from '../Questions/EditQs/EditPages/EditSurveyPage';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 // import HUE from '@material-ui/core/colors/HUE';
 
 // const color = HUE[SHADE];
@@ -37,13 +38,22 @@ export default class EditContainer extends Component {
       updateSurveyTitle,
       addNewOption,
       deleteOption,
-      saveChanges
+      saveChanges,
+      deleteQuestion
     } = this.props;
     return (
-      <div>
-        <h2>Edit Survey</h2>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}
+      >
+        <Typography color='primary' component='h1'>
+          <h2>Edit Survey</h2>
+        </Typography>
 
-        <div>
+        <div className='editTabType'>
           <Button
             color='#00e676'
             variant='contained'
@@ -61,7 +71,7 @@ export default class EditContainer extends Component {
           )}
         </div>
         <br />
-        <div>
+        <div className='editTabType'>
           <Button
             color='#00e676'
             variant='contained'
@@ -71,7 +81,7 @@ export default class EditContainer extends Component {
             Edit Question Tab
           </Button>
           {this.state.selectedTab === 2 ? (
-            <div>
+            <div className='editTabType'>
               <EditQuestionPage
                 question={this.state.selectedQ}
                 q_title={q_title}
@@ -80,7 +90,7 @@ export default class EditContainer extends Component {
                 updateQuestion={updateQuestion}
                 updateQuestionTitle={updateQuestionTitle}
                 // addNewOption={addNewOption}
-                // deleteOption={deleteOption}
+                deleteQuestion={deleteQuestion}
               />
             </div>
           ) : (
@@ -88,7 +98,7 @@ export default class EditContainer extends Component {
           )}
         </div>
         <br />
-        <div>
+        <div className='editTabType'>
           <Button
             color='#00e676'
             variant='contained'
@@ -98,7 +108,7 @@ export default class EditContainer extends Component {
             Edit Survey Tab
           </Button>
           {this.state.selectedTab === 3 ? (
-            <div>
+            <div className='editTabType'>
               <EditSurveyPage
                 saveChanges={saveChanges}
                 s_title={s_title}
