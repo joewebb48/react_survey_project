@@ -1,8 +1,0 @@
-have a react route that would survey/survey_id... 
-for each survey react-router-.go.. go to .survey.survey_id... that wil load react componenet
-use componetne did mount. use the ID off aprams make an axios rewuest to load up the survey questions.
-.
-take all the information on the clickes and basically on submit send all the information to the ansqwers database table.
-
-
--- populate the link that loads all the questions survey.

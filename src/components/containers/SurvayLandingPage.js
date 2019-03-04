@@ -36,57 +36,12 @@ class SurveyLandingPage extends Component {
       questions: []
     };
   }
-  // componentDidMount() {
-  //   // console.log('does this crap work');
-  // axios
-  //   .get(`/api/survey/${this.props.match.params.surveyId}`)
-  //   .then(firstRes => {
-  //     console.log('firstRes', firstRes.data);
-  //     this.setState({
-  //       questions: firstRes.data
-  //       // options: firstRes.data.options,
-  //       // s_title: firstRes.data[0].survey_title,
-  //       // s_subtitle: firstRes.data[0].subtitle
-  //     });
-  //       let promises = [];
-  //       firstRes.data
-  //         .forEach((item, i) => {
-  //           axios.get(`/api/options/${item.question_id}`).then(res => {
-  //             console.log('options red', res);
-  //             let questions = this.state.questions;
-  //             questions[i].options = res.data;
-  //             // console.log('finding options', questions[i]);
-  //             this.setState({
-  //               questions: questions
-  //               // options: questions[i].options
-  //             });
-  //           });
-  //         })
-  //         .catch(err => {
-  //           console.log('axios.get options', err);
-  //         });
-  //       axios.all(promises).then((secondRes, i) => {
-  //         console.log('second res', secondRes);
-  //         const optionInfo = [];
-  //         secondRes.forEach((item, i) => {
-  //           optionInfo.push(item.data);
-  //         });
-  //       });
 
-  //       this.setState({
-  //         s_title: firstRes.data[0].survey_title,
-  //         s_subtitle: firstRes.data[0].subtitle
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log('axios.get survey', err);
-  //     });
-  // }
   componentDidMount() {
     axios
       .get(`/api/getFullSurvey/${this.props.match.params.surveyId}`)
       .then(firstRes => {
-        // console.log('firstRes', firstRes.data);
+        console.log('firstRes', firstRes.data);
         this.setState({
           questions: firstRes.data,
           s_title: firstRes.data[0].surveyInfo[0].title,
@@ -101,6 +56,8 @@ class SurveyLandingPage extends Component {
     console.log('value', value);
     const { survey_id } = this.props.match.params.surveyId;
     const { questions } = this.state;
+    // const { questions_title: title } = this.state.question;
+
     const tempQs = questions.slice();
     tempQs.push(value);
     axios
@@ -108,6 +65,7 @@ class SurveyLandingPage extends Component {
       .then(response => {
         console.log('we comin back bruh', response.data);
       });
+    console.log('tt', tempQs);
     this.setState({
       questions: tempQs
     });
@@ -165,6 +123,15 @@ class SurveyLandingPage extends Component {
       // });
     });
   };
+  addToOptions = options => {
+    const { questions } = this.state;
+    console.log('add to options method', options);
+    // let newArr = this.state.questions;
+    this.setState({
+      questions: [...questions, options]
+    });
+    console.log('add to options state', this.state.questions);
+  };
   render() {
     console.log('SLP state questions:', this.state.questions);
     // console.log('SLP props:', this.props);
@@ -183,7 +150,7 @@ class SurveyLandingPage extends Component {
           // backgroundColor: 'light-grey'
         }}
       >
-        <Paper style={paperStyle}>
+        <Paper className='surveyLandingPaper' id='paper'>
           <SurveyPreview
             s_title={s_title}
             s_subtitle={s_subtitle}
@@ -192,8 +159,9 @@ class SurveyLandingPage extends Component {
           />
         </Paper>
 
-        <Paper style={editPaperStyle}>
+        <Paper className='surveyLandingPaper' id='paper'>
           <EditContainer
+            className='editContainer'
             s_title={s_title}
             s_subtitle={s_subtitle}
             selectedQuestionObject={selectedQuestionObject}
@@ -206,6 +174,7 @@ class SurveyLandingPage extends Component {
             updateQuestion={this.updateQuestion}
             saveChangesKeyPress={this.saveChangesKeyPress}
             saveChanges={this.saveChanges}
+            addToOptions={this.addToOptions}
             // addNewOption={this.addNewOption}
             // deleteOption={this.deleteOption}
           />

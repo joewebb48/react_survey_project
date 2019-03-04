@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 export default class MultiLineText extends Component {
   render() {
     // console.log('MLT:', this.props);
-    const { content, question_id, question_title } = this.props.question;
+    const { content, question_id, title } = this.props.question;
     // const { type } = this.props;
     const { type, selectedQuestion } = this.props;
     return (
@@ -17,7 +17,7 @@ export default class MultiLineText extends Component {
         }}
       >
         <Typography color='primary'>
-          <h1 className=''>{question_title}</h1>
+          <h1 className=''>{title}</h1>
         </Typography>
         {/* <IconButton aria-label='Delete' label='Delete Survey'>
           <DeleteIcon fontSize='small' />

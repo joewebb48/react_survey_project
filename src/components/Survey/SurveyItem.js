@@ -12,6 +12,7 @@ import axios from 'axios';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Typography from '@material-ui/core/Typography';
+import { inherits } from 'util';
 
 export default class SurveyItem extends Component {
   deleteSurvey = () => {
@@ -22,7 +23,8 @@ export default class SurveyItem extends Component {
   render() {
     // console.log('SI', this.props);
     let { survey_id: id, title } = this.props.survey;
-    console.log('which id is this', id);
+    // console.log('which id is this', id);
+    console.log(id);
     return (
       <div>
         {this.props.survey ? (
@@ -33,16 +35,41 @@ export default class SurveyItem extends Component {
               title={title}
             />
             <CardContent>
-              <FormControlLabel
-                control={<Switch color='primary' />}
-                label='Active'
-              />
-              <IconButton aria-label='Delete' label='Delete Survey'>
-                <DeleteIcon fontSize='large' />
-              </IconButton>
-              <Typography gutterBottom variant='headline' component='h2'>
-                <Link to={`/admin/surveys/${id}`}>{title}</Link>
-              </Typography>
+              <div className='itemRow'>
+                <Link to={`/takeSurvey/surveys/${id}`}>
+                  <h3>Survey Link</h3>
+                </Link>
+                <FormControlLabel
+                  control={<Switch color='primary' />}
+                  label='Active'
+                />
+                <IconButton aria-label='Delete' label='Delete Survey'>
+                  <DeleteIcon fontSize='large' />
+                </IconButton>
+                <Link to={`/reports/surveys/${id}`}>
+                  <h3>Reports</h3>
+                </Link>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignContent: 'space-between'
+                }}
+              >
+                <Typography gutterBottom variant='headline' component='h2'>
+                  <Link
+                    to={`/admin/surveys/${id}`}
+                    // style={{ display: 'inherits' }}
+                  >
+                    <i class='fas fa-edit' />
+                  </Link>
+                </Typography>
+                <Typography>
+                  <h4>{title}</h4>
+                </Typography>
+              </div>
               <Typography component='p'>
                 {/* {this.props.fields.description} */}
               </Typography>

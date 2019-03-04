@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 export default class SingleLineText extends Component {
   render() {
     // console.log('ST:', this.props.question);
-    const { question_id, question_title, options } = this.props.question;
+    const { question_id, title, options } = this.props.question;
     const { type, selectedQuestion } = this.props;
     // const { content } = this.props.question.options[0];
     // const { type } = this.props;
@@ -18,7 +18,7 @@ export default class SingleLineText extends Component {
         }}
       >
         <Typography color='primary'>
-          <h1 className=''>{question_title}</h1>
+          <h1 className=''>{title}</h1>
         </Typography>
         <div className='f'>
           <TextField

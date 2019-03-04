@@ -42,7 +42,7 @@ export default class EditQuestionPage extends Component {
         question,
         updateQuestion,
         updateQuestionTitle,
-        addNewOption,
+        addToOptions,
         deleteOption
       } = this.props;
       const { Q, findType, Options, Q_title, Q_ID } = this.state;
@@ -57,7 +57,7 @@ export default class EditQuestionPage extends Component {
               updateQuestion={updateQuestion}
               updateQuestionTitle={updateQuestionTitle}
               deleteQuestion={this.props.deleteQuestion}
-              // addNewOption={addNewOption}
+              addToOptions={addToOptions}
               // deleteOption={deleteOption}
             />
           );
@@ -72,7 +72,7 @@ export default class EditQuestionPage extends Component {
               updateQuestion={updateQuestion}
               updateQuestionTitle={updateQuestionTitle}
               deleteQuestion={this.props.deleteQuestion}
-              // addNewOption={addNewOption}
+              addToOptions={addToOptions}
               // deleteOption={deleteOption}
             />
           );
@@ -87,7 +87,7 @@ export default class EditQuestionPage extends Component {
               questionTitle={Q_title}
               updateQuestionTitle={updateQuestionTitle}
               deleteQuestion={this.props.deleteQuestion}
-              // addNewOption={addNewOption}
+              addToOptions={addToOptions}
               // deleteOption={deleteOption}
             />
           );
@@ -125,10 +125,17 @@ export default class EditQuestionPage extends Component {
     // mappedEditQuestion();
     // console.log(mappedEditQuestion());
     return (
-      <div>
-        <Typography color='primary' component='h1'>
+      <div
+      // style={{
+      //   display: 'flex',
+      //   flexDirection: 'column',
+      //   alignItems: 'center'
+      // }}
+      >
+        <Typography className='editQTitle' color='primary' component='h1'>
           <h1>Edit Question</h1>
         </Typography>
+
         {mappedEditQuestion(this.state.findType)}
       </div>
     );

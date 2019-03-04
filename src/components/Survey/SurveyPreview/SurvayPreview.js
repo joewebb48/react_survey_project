@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import QuestionListContainer from '../../Questions/QuestionListContainer';
 import Typography from '@material-ui/core/Typography';
+import Menu from '@material-ui/core/Menu';
 
 export default class SurveyPreview extends Component {
   // constructor(props) {
@@ -17,22 +18,21 @@ export default class SurveyPreview extends Component {
 
     return (
       <div className='survey_preview'>
-        <div>
-          <header>
-            <Typography color='primary' value={s_title} component='h1'>
-              <h1>{s_title}</h1>
-            </Typography>
-            <Typography color='primary' value={s_title} component='h6'>
-              <h6>{s_subtitle}</h6>
-            </Typography>
-          </header>
-          <hr />
+        <header>
+          <Typography color='primary' value={s_title} component='h1'>
+            <h1>{s_title}</h1>
+          </Typography>
+          <Typography color='primary' value={s_title} component='h6'>
+            <h6>{s_subtitle}</h6>
+          </Typography>
+        </header>
+
+        <div className='fixedBox'>
           <QuestionListContainer
             selectedQuestion={selectedQuestion}
             questions={questions}
             // options={options}
           />
-          <hr />
         </div>
       </div>
     );

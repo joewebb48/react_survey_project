@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import FormControl from '@material-ui/core/FormControl';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 import { adminLoggedIn } from '../../redux/reducer';
 
@@ -55,34 +59,54 @@ class Register extends Component {
         ) : (
           <div />
         )}
-        <div>
-          <h1>Registration</h1>
-          <br />
-          <input
-            type='text'
-            name='userName'
-            placeholder='userName'
-            value={this.state.userName}
-            onChange={this.handleChange}
-          />
-          <br />
-          <input
-            type='text'
-            name='email'
-            placeholder='email'
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-          <br />
-          <input
-            type='password'
-            name='password'
-            placeholder='password'
-            value={this.state.password}
-            onChange={this.handleChange}
-          />
-          <br />
-          <button onClick={this.handleClick}>Submit</button>
+        <div className='loginPage'>
+          <Paper className='loginPaper'>
+            <Typography>
+              <h1>Registration</h1>
+            </Typography>
+            <br />
+            <FormControl>
+              <input
+                style={{ margin: '5%' }}
+                type='text'
+                name='userName'
+                placeholder='userName'
+                value={this.state.userName}
+                onChange={this.handleChange}
+              />
+            </FormControl>
+            <br />
+            <FormControl>
+              <input
+                style={{ margin: '5%' }}
+                type='text'
+                name='email'
+                placeholder='email'
+                value={this.state.email}
+                onChange={this.handleChange}
+              />
+            </FormControl>
+            <br />
+            <FormControl>
+              <input
+                style={{ margin: '5%' }}
+                type='password'
+                name='password'
+                placeholder='password'
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </FormControl>
+            <br />
+            <Button
+              variant='contained'
+              size='small'
+              color='primary'
+              onClick={this.handleClick}
+            >
+              Submit
+            </Button>
+          </Paper>
           {this.state.error}
           {this.state.isLoading ? (
             <p className='saving'>

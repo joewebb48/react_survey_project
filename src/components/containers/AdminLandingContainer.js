@@ -13,7 +13,7 @@ class AdminLanding extends Component {
     return this.props.isAuthenticated ? (
       <div>
         <Typography color='primary' component='h1'>
-          <h1 className='websiteTitle'>WELCOME TO FREE SURVEY BUILDER</h1>
+          <h1 className='websiteTitle'>MyEasySurvey.com</h1>
         </Typography>
         <NewSurveyContainer />
         <SurveyListContainer />

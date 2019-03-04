@@ -1,7 +1,7 @@
 .App {
   text-align: center;
-  background-color: lightgray;
-  height: 100%;
+
+  /* height: 1000px; */
 }
 
 .App-logo {
@@ -20,14 +20,80 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+/* // */
+/* // Desktop view componenets */
+/* // */
 .mobileHeaderNavbar {
   display: none;
 }
 .websiteTitle {
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
+.editContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .editTabType {
-  width: 80%;
+  /* width: 90%; */
+  margin: 5%;
+}
+
+.surveyLandingPaper {
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+    0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+  width: 95%;
+  margin: 3%;
+  text-align: center;
+  display: inline-block;
+}
+.editQTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.editorCard {
+  /* width: 75%; */
+}
+.addQPage {
+  /* width: 75%; */
+}
+.loginPage {
+  /* width: 80%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15%;
+}
+.loginPaper {
+  /* width: 50%; */
+  border: 2px solid black;
+}
+.itemRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+}
+
+#surveyPreviewMenu {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}
+.addQCard {
+  display: flex;
+  flex-direction: column;
+  /* // width: '100%', */
+  align-items: center;
+  border: 1px solid lightGrey;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+#mobileViewEditContainer {
+  display: none;
 }
 
 .App-link {
@@ -43,7 +109,18 @@
   }
 }
 
-/* //MEDIA  */
+/* //MEDIA VIEW */
+/* @media (max-height: 999px) {
+  #Paper {
+    position: fixed;
+    border: 1px solid black;
+    top: 5px;
+    width: 50%;
+    overflow: auto;
+    height: 80%;
+    margin-top: 250px;
+  }
+} */
 
 @media (max-width: 600px) {
   .headerNavWide {
@@ -56,7 +133,69 @@
     line-height: 35px;
     font-size: 32px;
   }
+  .surveyLandingPaper {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    border: 0;
+    box-shadow: 0;
+    border-radius: 0;
+  }
   .editTabType {
+    margin: 1%;
+  }
+  .editorContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .MuiPaper-elevation2-14 {
+    box-shadow: 0;
+  }
+  #paper {
+    box-shadow: none;
+    border-radius: 0;
+    /* margin: 0.5%; */
+  }
+  #editTabButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  #wideViewEditContainer {
+    display: flex;
+    flex-direction: row;
+  }
+  #mobileh2 {
+    display: none;
+    font-size: 0;
+  }
+  .editTabType {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: 25px;
+  }
+  .addQPage {
+    font-size: 10px;
+  }
+  .addQCard {
+    /* width: 300px; */
+    /* padding-left: 40%; */
+  }
+  #surveyPreviesMenu {
+    display: none;
+  }
+  .fixedBox {
+    position: fixed;
+    border: 1px solid black;
+    top: 5px;
     width: 50%;
+    overflow: auto;
+    height: 80%;
+    margin-top: 250px;
+  }
+  .survey_preview {
+    margin-top: 60px;
   }
 }

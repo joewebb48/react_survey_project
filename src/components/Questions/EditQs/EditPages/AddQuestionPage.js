@@ -18,7 +18,7 @@ export default class AddQuestionPage extends Component {
     return {
       question_id: newId(),
       type_id: 2,
-      question_title: 'Untitled',
+      title: 'Untitled',
       options: [{ content: 'placeholder', options_id: newId() }]
     };
   };
@@ -26,7 +26,7 @@ export default class AddQuestionPage extends Component {
     return {
       question_id: newId(),
       type_id: 3,
-      question_title: 'Untitled',
+      title: 'Untitled',
       options: [{ content: 'placeholder', options_id: newId() }]
     };
   }
@@ -34,7 +34,7 @@ export default class AddQuestionPage extends Component {
     return {
       question_id: newId(),
       type_id: 4,
-      question_title: 'Select a choice',
+      title: 'Select a choice',
       options: [
         {
           content: 'First Choice',
@@ -55,7 +55,7 @@ export default class AddQuestionPage extends Component {
     return {
       question_id: newId(),
       type_id: 5,
-      question_title: 'Select a choice',
+      title: 'Select a choice',
       options: [
         {
           content: 'First Choice',
@@ -76,7 +76,7 @@ export default class AddQuestionPage extends Component {
     return {
       question_id: newId(),
       type_id: 1,
-      question_title: 'Select a choice',
+      title: 'Select a choice',
       options: [
         {
           content: 'First Choice',
@@ -101,22 +101,12 @@ export default class AddQuestionPage extends Component {
     return (
       // display='flex' flexDirection='column'
 
-      <div>
+      <div className='addQPage'>
         <Typography color='primary' component='h1'>
           <h1>Add Question</h1>
         </Typography>
 
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            width: '100%',
-            alignItems: 'center',
-            border: '1px solid lightGrey',
-            paddingTop: '5%',
-            paddingBottom: '5%'
-          }}
-        >
+        <div className='addQCard'>
           <Button
             variant='contained'
             size='small'

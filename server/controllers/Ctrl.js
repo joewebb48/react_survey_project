@@ -59,6 +59,29 @@ module.exports = {
       res.status(500).send(error);
     }
   },
+  takeSurvey: async (req, res) => {
+    try {
+      let dbInstance = req.app.get('db');
+      const { surveyID } = req.params;
+      console.log(surveyID);
+      let surveyInformation = await dbInstance.getSingleSurvey(surveyID);
+      let allQuestions = await dbInstance.getQuestion(surveyID);
+      for (let i = 0; i < allQuestions.length; i++) {
+        let questionId = allQuestions[i].question_id;
+
+        let getOptions = await dbInstance.getOptionsForQuestion(questionId);
+        allQuestions[i].options = getOptions;
+        allQuestions[i].surveyInfo = surveyInformation;
+      }
+      // console.log(surveyID);
+      // console.log('take survey', allQuestions);
+      // console.log(allQuestions);
+      res.send(allQuestions);
+    } catch (error) {
+      console.log('Error Getting Survey to take:', error);
+      res.status(500).send(error);
+    }
+  },
 
   getOptions: async (req, res) => {
     try {
@@ -119,13 +142,9 @@ module.exports = {
   addQuestion: async (req, res) => {
     try {
       const dbInstance = req.app.get('db');
-      let { question_title, type_id } = req.body;
+      let { title, type_id } = req.body;
       let { id } = req.params;
-      let question = await dbInstance.addQuestionToSurvey([
-        id,
-        question_title,
-        type_id
-      ]);
+      let question = await dbInstance.addQuestionToSurvey([id, title, type_id]);
       console.log(question);
 
       let mappedOptions = req.body.options.map(async (option, i) => {

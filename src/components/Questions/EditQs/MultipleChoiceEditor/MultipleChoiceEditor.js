@@ -28,21 +28,38 @@ class MultipleChoiceEditor extends Component {
     super(props);
     this.input = {};
     this.state = {
-      options: [],
+      options: '',
+      queestions: [],
       optionTitle: '',
-      newQuestionTitle: ''
+      newQuestionTitle: '',
+      selectedQuestionTitle: ''
     };
+  }
+  componentDidMount() {
+    this.setState({
+      options: this.props.options,
+      questions: this.props.options
+    });
   }
   handleChange = value => {
     this.setState({
       newQuestionTitle: value
     });
   };
-  addNewOption = () => {
+  addNewOption = value => {
+    // console.log('v', value);
+    //  addToOptions(value)
     axios
       .post(`/api/addNewOption/${this.props.question.question_id}`)
       .then(res => {
-        console.log(res);
+        // console.log('o', res.data);
+        const { options } = this.state;
+
+        this.setState({
+          options: [...options, res.data]
+        });
+        console.log(options);
+        this.props.addToOptions(res.data);
       });
   };
   deleteOption = id => {
@@ -53,18 +70,19 @@ class MultipleChoiceEditor extends Component {
   };
   editOptionContent = content => {
     axios.put(`/api/editOptionContent`, content).then(res => {
-      console.log(`edit opion content res.data`, res.data);
+      // console.log(`edit opion content res.data`, res.data);
     });
   };
   editQuestionTitle = title => {
-    console.log('title', title);
+    // console.log('title', title);
     const { question_id } = this.props.question;
     axios.put(`/api/editQuestionTitle/${question_id}`, { title }).then(res => {
-      console.log('edit question res', res.data);
+      // console.log('edit question res', res.data);
     });
   };
   render() {
     // console.log('MCEDITOR PROPS:', this.props);
+    // console.log('mceditor', this.state);
     const {
       options,
       questionTitle,
@@ -73,7 +91,7 @@ class MultipleChoiceEditor extends Component {
       deleteQuestion
     } = this.props;
     return (
-      <div>
+      <div className='editorCard'>
         <Card>
           <CardContent>
             <div>
@@ -129,26 +147,29 @@ class MultipleChoiceEditor extends Component {
               </Fab>
               <br />
               <h4>Edit Options</h4>
-              {options.map((option, i) => {
-                return (
-                  <div>
-                    <TextField
-                      id='standard-name'
-                      margin='normal'
-                      type='text'
-                      value={option.content}
-                    />
-                    <div />
-                    <IconButton
-                      aria-label='Delete'
-                      // className={classes.margin}
-                      onClick={() => this.deleteOption(option.options_id)}
-                    >
-                      <DeleteIcon fontSize='medium' />
-                    </IconButton>
-                  </div>
-                );
-              })}
+              {!this.state.options
+                ? ''
+                : this.state.options.map((option, i) => {
+                    return (
+                      <div>
+                        <TextField
+                          id='standard-name'
+                          margin='normal'
+                          type='text'
+                          placeholder={option.content}
+                          // onChange={e => updateContentTitle(e.target.value)}
+                        />
+                        <div />
+                        <IconButton
+                          aria-label='Delete'
+                          // className={classes.margin}
+                          onClick={() => this.deleteOption(option.options_id)}
+                        >
+                          <DeleteIcon fontSize='medium' />
+                        </IconButton>
+                      </div>
+                    );
+                  })}
               <Button variant='contained' size='small' color='primary'>
                 SUBMIT CHANGES
               </Button>

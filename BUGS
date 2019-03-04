@@ -1,0 +1,53 @@
+
+MAJOR BUGS
+-- If I refresh the survay landing page (when i want to delete an options or question or survey) the code breaks becasue of the axios.get request.
+
+BUGS
+-- Logout wont redirect to the login page.
+edit options doesnt type anymore..
+cant figure out how to delete the survey from the admin landing page..(question List container)
+-- not a bug.... but I want tab type to change to 2 when selectedQuestion is not null.
+cant figure out how to change colors.
+cant figure out how to do responsive design.
+multiple choice buttons are always checked...
+the background color of the over all App only goes down part way. why wont it go all the way to the bottom of the screen?
+cant figure out how to seperatre the home page button and the logout button on in my Header container.
+^^^ why arnt they buttons either? they can be clicked on. but dont act as buttons
+
+
+ADDITIONAL THINGS I SHOULD DO...
+-- change font for survey preview Title and Subtitle.
+-- move everything to rtedux so it will update in real time.
+-- or figure out another option to have things updagte in real time.
+-- Add a Footer
+-- Add a placeholder to the dropDown Question.
+
+
+
+BEYOND MVP
+-- Add individual link for 
+-- Implimenting the Active Tab on SurveyItem
+-- add the link to the survey on the SurveyItem
+-- impliment Reports page for each additional survey
+
+
+[ { options_id: 453, content: 'placeholder', correct: null, question_id: 243 } ]
+[ { options_id: 442, content: 'placeholder', correct: null, question_id: 238 } ]
+[ { options_id: 455, content: 'placeholder',correct: null,question_id: 245 } ]
+[ 
+    { options_id: 445,content: 'Third Choice',correct: null, question_id: 240 },
+  { options_id: 444,content: 'First Choice',correct: null, question_id: 240 },
+  { options_id: 446,content: 'Second Choice',correct: null,question_id: 240 } 
+  ]
+  [ { options_id: 448,
+    content: 'Third Choice',
+    correct: null,
+    question_id: 241 },
+  { options_id: 447,
+    content: 'First Choice',
+    correct: null,
+    question_id: 241 },
+  { options_id: 449,
+    content: 'Second Choice',
+    correct: null,
+    question_id: 241 } ]

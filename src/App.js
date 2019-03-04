@@ -11,6 +11,8 @@ import Register from './components/Auth/Register';
 import AdminLandingContainer from './components/containers/AdminLandingContainer';
 import SurveyLandingPage from './components/containers/SurvayLandingPage';
 import EditContainer from './components/containers/EditContainer';
+import TakeSurveyView from './components/TakeSurvey/TakeSurveyView';
+import SurveyReports from './components/Reports/SurveyReports';
 
 class App extends Component {
   constructor() {
@@ -47,7 +49,16 @@ class App extends Component {
               component={SurveyLandingPage}
             >
               <Route path='edit' component={EditContainer} />
+              TakeSurveyView
             </Route>
+            <Route
+              path='/takesurvey/surveys/:surveyId'
+              component={TakeSurveyView}
+            />
+            <Route
+              path='/reports/surveys/:surveyId'
+              component={SurveyReports}
+            />
           </Switch>
         </div>
       </HashRouter>

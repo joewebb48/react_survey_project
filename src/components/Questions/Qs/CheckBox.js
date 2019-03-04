@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 export default class Checkbox extends Component {
   render() {
     // console.log('cb:', this.props);
-    const { question_id, question_title, title, options } = this.props.question;
+    const { question_id, title, options } = this.props.question;
     const { type } = this.props;
     const { selectedQuestion } = this.props;
 
@@ -25,7 +25,7 @@ export default class Checkbox extends Component {
       >
         <div>
           <Typography color='primary'>
-            <h1>{question_title}</h1>
+            <h1>{title}</h1>
           </Typography>
           {/* <IconButton aria-label='Delete' label='Delete Survey'>
             <DeleteIcon fontSize='small' />

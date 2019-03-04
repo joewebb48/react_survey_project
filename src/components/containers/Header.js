@@ -52,7 +52,8 @@ class Header extends Component {
                 style={{ textDecoration: 'none', color: 'black' }}
               >
                 <div id='logo'>
-                  <h4 style={{ color: 'white' }}>MY Survey App</h4>
+                  {/* <i class='fas fa-home' style={{backgroundColor: 'white', paddingTop: '5px'}}/> */}
+                  <h4 style={{ color: 'white' }}>MyEasySurvey.com</h4>
                 </div>
               </Link>
               <div className='headerNavWide'>

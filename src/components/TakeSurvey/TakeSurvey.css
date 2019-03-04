@@ -1,0 +1,51 @@
+.takeSurveyContainer {
+  /* border: 9px solid green; */
+  /* width: 100%; */
+  margin: 1%;
+  padding-top: 0;
+}
+
+.takeSurveyForm {
+  /* border: 9px solid gold;
+  width: 90%;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center; */
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+#takeSurveyPaper {
+  /* border: 9px solid red; */
+  /* align-content: center; */
+  /* width: 50%; */
+  /* margin-right: 15%; */
+  margin: 5%;
+  /* padding: 20px; */
+  position: fixed;
+  border: 1px solid black;
+  /* top: 5px; */
+  width: 80%;
+  overflow: auto;
+  height: 80%;
+  /* margin-top: 10%; */
+}
+.questionList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+  /* mar-left: 20%; */
+}
+.questionTake {
+  border: 5px solid red;
+}

@@ -26,7 +26,7 @@ export default class EditSurveyPage extends Component {
       saveChanges
     } = this.props;
     return (
-      <div>
+      <div className='editorCard'>
         <Card>
           <CardContent>
             <Typography color='primary' component='h1'>

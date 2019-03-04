@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 
 export default class Dropdown extends Component {
   render() {
-    const { question_title, question_id } = this.props.question;
+    const { question_title, question_id, title } = this.props.question;
     const { type, selectedQuestion } = this.props;
 
     const mappedOptions = this.props.options
@@ -31,7 +31,7 @@ export default class Dropdown extends Component {
       >
         <FormControl variant='outlined' value='Select Option'>
           <Typography color='primary'>
-            <h1>{question_title}</h1>
+            <h1>{title}</h1>
           </Typography>
           {/* <IconButton aria-label='Delete' label='Delete Survey'>
             <DeleteIcon fontSize='small' />

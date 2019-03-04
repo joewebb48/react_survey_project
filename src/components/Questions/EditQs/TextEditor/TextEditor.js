@@ -44,7 +44,7 @@ export default class TextEditor extends Component {
       type_id
     } = this.props.question;
     return (
-      <div>
+      <div className='editorCard'>
         <Card>
           <CardContent>
             <div>
